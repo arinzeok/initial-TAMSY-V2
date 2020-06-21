@@ -1,0 +1,20 @@
+button {
+    font-family: Montserrat, sans-serif;
+    background: none;
+    border-radius: 6px;
+    padding: 5.5px 15px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+button.ghostBtn {
+    border: 1px solid #18A0FB;
+    color: #18A0FB;
+    background-color: #fff;
+}
+
+button.normalBtn {
+    background-color: #1F5FBE;
+    color: #fff;
+    border: 1px solid transparent;
+}

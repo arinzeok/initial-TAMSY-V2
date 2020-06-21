@@ -1,0 +1,33 @@
+<div class='panel'>
+    <div class='forms-container'>
+        <div class="input-container">
+            <input type="text" placeholder="Search...">
+            <img src="assets/icons/search-icon.svg" alt="" srcset="">
+        </div>
+        <div class="display">
+            <label for="display">Display</label>
+            <select name="display" id="display">
+        <option></option>
+        <option>option 1</option>
+        <option>option 2</option>
+        <option>option 3</option>
+      </select>
+        </div>
+        <div class="row">
+            <label for="row">Row</label>
+            <div id='row'>1</div>
+        </div>
+    </div>
+    <div class='button-container'>
+        <app-blue-button [btnType]='["ghostBtn"]'>
+            Advanced Search
+        </app-blue-button>
+        <app-blue-button [btnType]='["normalBtn"]'>
+            Apply for Type Approval
+        </app-blue-button>
+    </div>
+</div>
+
+<div class='application-list-container'>
+    <app-single-application></app-single-application>
+</div>
