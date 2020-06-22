@@ -1,1 +1,33 @@
-<p>get-started works!</p>
+<div class="container">
+    <p>get-started works!</p>
+
+    <div class="main">
+        <div class="image-container">
+            <img src="assets/images/Comms-Icon-Group.png" alt="" srcset="">
+        </div>
+        <div class="info">
+            <div class="info-header-container">
+                <div class="header">Get started with your Type Approval Application</div>
+                <div class="sub-header">Follow the steps below to complete your type approval application. You can apply to type approve multiple equipment for a Certificate Holder at the same time.</div>
+            </div>
+            <div class="info-body">
+                <ul>
+                    <li> <span>1</span> Select a Certificate Holder’s profile from the list of profiles you have created.</li>
+                    <li> <span>2</span> Add the equipment you want to type approve. You can add more than one equipment and categorize them accordingly.</li>
+                    <li> <span>3</span> Upload required equipment documents and mactch them to the corresponding equipment. Click here to see the list of required documents.</li>
+                    <li> <span>4</span> Add equipment specification profiles and assign each equipment to one or more specification profile.</li>
+                    <li> <span>5</span> Review and submit your application.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div style="display: flex; margin-top: 30px;">
+        <div class='button-container'>
+            <app-blue-button [btnType]='["normalBtn", "btn-lg"]' routerLink='/home/type-approval-application/select-certificate-holder'>
+                Get Started!
+            </app-blue-button>
+            <div class="not-right-now">Not right now</div>
+        </div>
+    </div>
+</div>
