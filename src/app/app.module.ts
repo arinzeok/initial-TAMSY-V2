@@ -7,10 +7,12 @@ import { AppComponent } from './app.component';
 import { HomeModule } from './home/home.module';
 import { TypeApprovalApplicationModule } from './type-approval-application/type-approval-application.module';
 import { SharedModule } from './shared/shared.module';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
