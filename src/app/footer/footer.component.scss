@@ -1,0 +1,15 @@
+@font-face {
+    font-family: RobotoLight;
+    src: ('src/assets/fonts/Roboto/Roboto-Light.ttf')
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-bottom: 10px;
+    div {
+        font-family: RobotoLight, sans-serif;
+        font-size: 14px;
+    }
+}
