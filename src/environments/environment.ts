@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  API_BASE_URL: 'http://tamsy.showcase.com.ng/api-server',
+  WEB: 'http://localhost:4200/#/',
+  WEB2: 'http://localhost:4200/#',
+  REDIRECT: 'http://localhost:4200/#/redirect',
+  production: true
 };
 
 /*
