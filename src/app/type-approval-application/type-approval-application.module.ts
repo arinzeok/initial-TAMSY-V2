@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+// import { PriDragDropModule } from '@angular/cdk';
+import { PriDragDropModule } from 'pri-ng-dragdrop';
 
 import { TypeApprovalApplicationRoutingModule } from './type-approval-application-routing.module';
 import { GetStartedComponent } from './get-started/get-started.component';
@@ -8,7 +11,7 @@ import { TypeApprovalApplicationComponent } from './type-approval-application/ty
 import { SelectCertificateHolderComponent } from './select-certificate-holder/select-certificate-holder.component';
 import { AddEquipmentComponent } from './add-equipment/add-equipment.component';
 import { FormsModule } from '@angular/forms';
-
+import { DndModule } from 'ngx-drag-drop';
 
 @NgModule({
   declarations: [GetStartedComponent, TypeApprovalApplicationComponent, SelectCertificateHolderComponent, AddEquipmentComponent],
@@ -16,7 +19,10 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     TypeApprovalApplicationRoutingModule,
     SharedModule,
-    FormsModule
+    FormsModule,
+    DragDropModule,
+    PriDragDropModule,
+    DndModule
   ]
 })
 export class TypeApprovalApplicationModule { }

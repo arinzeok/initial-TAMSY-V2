@@ -1,0 +1,210 @@
+<div>
+    <p>add-equipment works!</p>
+
+    <div class="top">
+        <div class="certificate-holder-details">
+            <div class="certificate-holder-name">
+                <label>Certificate Holder</label>
+                <div>Huawei Technologies Co., Ltd.</div>
+            </div>
+            <div class="certificate-holder-address">
+                <label>Address</label>
+                <div>One Apple Park Way Cupertino, CA 95014, USA</div>
+            </div>
+            <div></div>
+        </div>
+        <app-blue-button [btnType]="['normalBtn', 'btn-xl']" (click)='this.modalService.show()'>Add Equipment</app-blue-button>
+    </div>
+    <div class="bottom">
+        <div class='info-panel' *ngIf='false'>
+            <div class='img-container'>
+                <img src="assets/icons/Info Panel.svg" alt="">
+                <img src="assets/icons/Info Arrow.svg" alt="">
+            </div>
+        </div>
+        <div class="equipment-tip">
+            <img src="assets/icons/wb-incandescent.svg" alt="" /> Select an equipment below and enter its details in the panel on the right
+        </div>
+
+        <div class="grid">
+            <div class="left">
+                <div *ngIf='false' priDropList='demoData' id='parent' [priDropListSorting]='true' [priDropListConnectedTo]="['child']" (priDropListDrop)='drop($event)' [priDropListData]="demoData" class="main-list">
+                    <div class="single-equipment-box-container" *ngFor="let node of demoData, singleEquipmentEbox" priDragItem [priDragItemData]="node">
+                        <!-- <ng-content *ngTemplateOutlet='parent, context: {node: node}'></ng-content> -->
+                        <div class="node-item">
+                            <div class="single-equipment-box" (click)="node.isExpanded=!node.isExpanded">
+                                <img src="assets/icons/node-handle.svg" alt="" class='node-handle-icon' cdkDragHandle> {{node.id}}
+                                <img src="assets/icons/kebab-menu.svg" alt="" class='node-menu-icon'>
+                            </div>
+
+                            <div priDropList='node.children' id='child' [priDropListConnectedTo]='["parent"]' (priDropListDrop)='drop($event)' [priDropListSorting]='true' [priDropListData]="node.children" class="example-list" *ngIf='node.children.length && node.isExpanded'>
+                                <div class=" child" *ngFor="let child of node.children, singleEquipmentEbox" priDragItem [priDragItemData]="child">
+                                    <!-- <ng-container *ngTemplateOutlet='parent, context: {node: child}'></ng-container> -->
+                                    <div class="node-item">
+                                        <div class="single-equipment-box" (click)="node.isExpanded=!node.isExpanded">
+                                            <img src="assets/icons/node-handle.svg" alt="" class='node-handle-icon' cdkDragHandle> {{child.id}}
+                                            <img src="assets/icons/kebab-menu.svg" alt="" class='node-menu-icon'>
+                                        </div>
+                                        <!-- <div>
+
+                                    </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div>
+
+                          </div> -->
+                        </div>
+                    </div>
+                </div>
+
+                <ng-template #file let-file="item" let-entries="entries">
+
+                    <tr [dndDraggable]="file" dndEffectAllowed="move" (dndMoved)="onDragged(file, entries)" class="tree-item  single-equipment-box">
+                        <td>
+                            <img src="assets/icons/node-handle.svg" alt="" class='node-handle-icon'> [f] {{file.title}}
+                            <img src="assets/icons/kebab-menu.svg" alt="" class='node-menu-icon'>
+                        </td>
+                    </tr>
+
+                </ng-template>
+
+                <ng-template #directory let-directory="item" let-entries="entries">
+
+                    <!-- hacky way to enable drop between directory which itself are dropzones -->
+                    <!-- usually use a bit of css so drag events have an area to work on but -->
+                    <!-- tables prevent that :-/ -->
+                    <tr>
+                        <td></td>
+                    </tr>
+
+                    <tr [dndDraggable]="directory" dndEffectAllowed="move" (dndMoved)="onDragged(directory, entries)" class="tree-item single-equipment-box" (click)="directory.isOpen = !directory.isOpen">
+
+                        <td dndDropzone (dndDrop)="onDrop($event, directory.entries)">
+                            <img src="assets/icons/node-handle.svg" alt="" class='node-handle-icon'> [d] {{directory.title}}
+                            <img src="assets/icons/kebab-menu.svg" alt="" class='node-menu-icon'>
+                        </td>
+
+                        <ng-container *ngIf="directory.isOpen">
+                            <ng-container *ngTemplateOutlet="tree; context:{ $implicit: directory.entries }"></ng-container>
+                        </ng-container>
+
+                    </tr>
+
+                </ng-template>
+
+                <ng-template #tree let-entries>
+
+                    <table>
+
+                        <tbody dndDropzone (dndDrop)="onDrop($event, entries)">
+
+                            <tr dndPlaceholderRef class="placeholder">
+                                <td></td>
+                            </tr>
+
+                            <ng-container *ngFor="let item of entries; let last = last">
+
+                                <ng-container *ngIf="item.isDirectory">
+                                    <ng-container *ngTemplateOutlet="directory; context: {item: item, entries: entries}"></ng-container>
+                                </ng-container>
+
+                                <ng-container *ngIf="!item.isDirectory">
+                                    <ng-container *ngTemplateOutlet="file; context: {item: item, entries: entries}"></ng-container>
+                                </ng-container>
+
+                            </ng-container>
+
+                        </tbody>
+
+                    </table>
+
+                </ng-template>
+
+                <ng-container *ngTemplateOutlet="tree; context:{ $implicit: entries }"></ng-container>
+            </div>
+            <div class="right">
+                <form>
+                    <div>
+                        <label for="equipment-type">Equipment Type</label>
+                        <select name="" id="">
+              <option>-- Select Equipment Type --</option>
+              <option>Option 1</option>
+              <option>Option 2</option>
+              <option>Option 3</option>
+            </select>
+                    </div>
+                    <div>
+                        <label for="regulatory-name">Regulatory Name</label
+            ><input type="text" />
+          </div>
+          <div>
+            <label for="commercial-name">Commercial Name</label
+            ><input type="text" />
+          </div>
+          <div>
+            <label for="function-of-the-equipment"
+              >Function Of The Equipment</label
+            ><input type="text" />
+          </div>
+          <div>
+            <label for="name-of-the-manufacturer"
+              >Name Of The Manufacturer</label
+            ><input type="text" />
+          </div>
+          <div>
+            <label for="address-of-the-manufacturer"
+              >Address Of The Manufacturer</label
+            ><input type="text" />
+          </div>
+          <div>
+            <label for="year-of-manufacture">Year Of Manufacture</label
+            ><input type="text" />
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf='this.modalService.showModal'>
+  <div class="backdrop" (click)='this.modalService.hide()'></div>
+<div class="modal-dialog">
+  <div class="modal-message">
+    <div class="modal-header">
+      <h3 class='modal-title'>New Equipment</h3>
+      <span class="close" (click)='this.modalService.hide()'>&times;</span>
+    </div>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div>
+        <label for="new-equipment-label">Equipment Regulatory Name</label>
+                        <input type="text">
+                    </div>
+                    <div class="button-container">
+                        <app-blue-button [btnType]='["ghostBtn", "btn-md"]'>Done</app-blue-button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- <ng-template #parent let-node='node'>
+        <div [attr.data-id]="node.id" [attr.id]="'node-'+node.id" class="node-item">
+            <div class="single-equipment-box" (click)="node.isExpanded=!node.isExpanded">
+                <img src="assets/icons/node-handle.svg" alt="" class='node-handle-icon' cdkDragHandle> {{node.id}}
+                <img src="assets/icons/kebab-menu.svg" alt="" class='node-menu-icon'>
+            </div>
+
+            <div cdkDropList cdkDropListGroup priDropList [cdkDropListData]='node.children' [priDropListSorting]='true' [priDropListData]="node.children" [cdkDropListConnectedTo]='dropTargetIds' [id]='node.id' class="example-list" (cdkDropListDropped)="drop($event)"
+                *ngIf='node.children.length && node.isExpanded'>
+                <div class=" child" (cdkDragMoved)="dragMoved($event)" *ngFor="let child of node.children, singleEquipmentEbox" priDragItem [priDragItemData]="child" cdkDrag cdkDragLockAxis="y" cdkDragBoundary=".left" [cdkDragData]="child.id">
+                    <ng-container *ngTemplateOutlet='parent, context: {node: child}'></ng-container>
+                </div>
+            </div>
+            <div>
+
+            </div>
+        </div>
+    </ng-template> -->
