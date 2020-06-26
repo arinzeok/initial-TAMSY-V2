@@ -28,36 +28,6 @@
 
         <div class="grid">
             <div class="left">
-                <div *ngIf='false' priDropList='demoData' id='parent' [priDropListSorting]='true' [priDropListConnectedTo]="['child']" (priDropListDrop)='drop($event)' [priDropListData]="demoData" class="main-list">
-                    <div class="single-equipment-box-container" *ngFor="let node of demoData, singleEquipmentEbox" priDragItem [priDragItemData]="node">
-                        <!-- <ng-content *ngTemplateOutlet='parent, context: {node: node}'></ng-content> -->
-                        <div class="node-item">
-                            <div class="single-equipment-box" (click)="node.isExpanded=!node.isExpanded">
-                                <img src="assets/icons/node-handle.svg" alt="" class='node-handle-icon' cdkDragHandle> {{node.id}}
-                                <img src="assets/icons/kebab-menu.svg" alt="" class='node-menu-icon'>
-                            </div>
-
-                            <div priDropList='node.children' id='child' [priDropListConnectedTo]='["parent"]' (priDropListDrop)='drop($event)' [priDropListSorting]='true' [priDropListData]="node.children" class="example-list" *ngIf='node.children.length && node.isExpanded'>
-                                <div class=" child" *ngFor="let child of node.children, singleEquipmentEbox" priDragItem [priDragItemData]="child">
-                                    <!-- <ng-container *ngTemplateOutlet='parent, context: {node: child}'></ng-container> -->
-                                    <div class="node-item">
-                                        <div class="single-equipment-box" (click)="node.isExpanded=!node.isExpanded">
-                                            <img src="assets/icons/node-handle.svg" alt="" class='node-handle-icon' cdkDragHandle> {{child.id}}
-                                            <img src="assets/icons/kebab-menu.svg" alt="" class='node-menu-icon'>
-                                        </div>
-                                        <!-- <div>
-
-                                    </div> -->
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- <div>
-
-                          </div> -->
-                        </div>
-                    </div>
-                </div>
-
                 <ng-template #file let-file="item" let-entries="entries">
 
                     <tr [dndDraggable]="file" dndEffectAllowed="move" (dndMoved)="onDragged(file, entries)" class="tree-item  single-equipment-box">
