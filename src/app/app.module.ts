@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { SuiModule } from 'ng2-semantic-ui';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,7 +20,8 @@ import { FooterComponent } from './footer/footer.component';
     AppRoutingModule,
     HomeModule,
     TypeApprovalApplicationModule,
-    SharedModule
+    SharedModule,
+    SuiModule
   ],
   providers: [],
   bootstrap: [AppComponent]

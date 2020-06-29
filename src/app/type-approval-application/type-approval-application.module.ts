@@ -12,6 +12,7 @@ import { SelectCertificateHolderComponent } from './select-certificate-holder/se
 import { AddEquipmentComponent } from './add-equipment/add-equipment.component';
 import { FormsModule } from '@angular/forms';
 import { DndModule } from 'ngx-drag-drop';
+import { SuiModule } from 'ng2-semantic-ui';
 
 @NgModule({
   declarations: [GetStartedComponent, TypeApprovalApplicationComponent, SelectCertificateHolderComponent, AddEquipmentComponent],
@@ -22,7 +23,8 @@ import { DndModule } from 'ngx-drag-drop';
     FormsModule,
     DragDropModule,
     PriDragDropModule,
-    DndModule
+    DndModule,
+    SuiModule
   ]
 })
 export class TypeApprovalApplicationModule { }

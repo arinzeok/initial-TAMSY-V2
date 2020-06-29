@@ -4,6 +4,9 @@ nav {
         padding-top: 40px;
         padding-bottom: 40px;
         background: $NCC-blue;
+        img {
+            cursor: pointer;
+        }
         >div {
             display: flex;
             justify-content: space-between;
