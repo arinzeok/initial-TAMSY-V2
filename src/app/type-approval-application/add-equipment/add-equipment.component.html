@@ -121,7 +121,7 @@
             <button class="ui green button" (click)="modal.approve('done')">OK</button>
         </div> -->
             </sui-modal>
-            <sui-modal [isClosable]="true" [size]='"mini"' (dismissed)="showNodeOptionsModal()" *ngIf='showNodeOptions' #modal>
+            <sui-modal [isClosable]="true" [size]='"mini"' (dismissed)="hideNodeOptionsModal()" *ngIf='showNodeOptions' #modal>
                 <div class="content">
                     <div (click)='showAddEquipmentModal()' class='node-option'>ADD EQUIPMENT HERE</div>
                     <div (click)='duplicateEquipment()' class='node-option'>DUPLICATE</div>
