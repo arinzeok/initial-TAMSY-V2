@@ -1,5 +1,4 @@
 <div class="main">
-
     <div class="top">
         <div class="certificate-holder-details">
             <div class="certificate-holder-name">
@@ -12,13 +11,15 @@
             </div>
             <div></div>
         </div>
-        <button (click)='showAddEquipmentModal()' class="add-equipment">Add Equipment</button>
+        <button (click)="showAddEquipmentModal()" class="add-equipment">
+      Add Equipment
+    </button>
     </div>
     <div class="bottom">
-        <div class='info-panel' *ngIf='!this.nodes.length'>
-            <div class='img-container'>
-                <img src="assets/icons/Info Panel.svg" alt="">
-                <img src="assets/icons/Info Arrow.svg" alt="">
+        <div class="info-panel" *ngIf="!this.nodes.length">
+            <div class="img-container">
+                <img src="assets/icons/Info Panel.svg" alt="" />
+                <img src="assets/icons/Info Arrow.svg" alt="" />
             </div>
         </div>
         <div class="equipment-tip">
@@ -28,33 +29,30 @@
         <div class="grid">
             <div class="left">
                 <ng-template #tmplNode let-node="node">
-                    <div class="node-item" [attr.data-id]="node.id" [attr.id]="'node-'+node.id">
-
-                        <div class="node-title single-equipment-box" [ngClass]='{active: selectedNode?.key === node.key}' (click)="node.isExpanded=!node.isExpanded">
-                            <img src="assets/icons/node-handle.svg" class='node-handle-icon' alt="" cdkDragHandle>
-                            <div> {{node.children.length ? (node.isExpanded?'':'') : '&nbsp;&nbsp;&nbsp;'}}
+                    <div class="node-item" [attr.data-id]="node.id" [attr.id]="'node-' + node.id">
+                        <div class="node-title single-equipment-box" [ngClass]="{ active: selectedNode?.key === node.key }" (click)="node.isExpanded = !node.isExpanded">
+                            <img src="assets/icons/node-handle.svg" class="node-handle-icon" alt="" cdkDragHandle />
+                            <div>
+                                {{ node.children.length ? node.isExpanded ? "" : "" : "&nbsp;&nbsp;&nbsp;" }}
                                 <i *ngIf="node.children.length && node.isExpanded" class="chevron down icon"></i>
-                                <i *ngIf="node.children.length && !node.isExpanded" class="chevron right icon"></i> &nbsp;&nbsp;&nbsp; {{node.details.equipmentRegulatoryName}}</div>
-                            <img src="assets/icons/kebab-menu.svg" class="node-menu-icon" alt="" (click)='showNodeOptionsModal(node.key, $event)'>
+                                <i *ngIf="node.children.length && !node.isExpanded" class="chevron right icon"></i> &nbsp;&nbsp;&nbsp; {{ node.details.equipmentRegulatoryName }}
+                            </div>
+                            <img src="assets/icons/kebab-menu.svg" class="node-menu-icon" alt="" (click)="showNodeOptionsModal(node.key, $event)" />
                         </div>
 
                         <div *ngIf="node.isExpanded && node.children.length" class="node-children" cdkDropList [cdkDropListData]="node.children" [id]="node.id" [cdkDropListConnectedTo]="dropTargetIds" (cdkDropListDropped)="drop($event)" [cdkDropListSortingDisabled]="true">
-
-                            <div *ngFor="let child of node.children" cdkDrag [cdkDragData]="child.id" (click)='selectSingleEquipment(child.key); $event.stopPropagation()' (cdkDragMoved)="dragMoved($event)">
-                                <ng-container *ngTemplateOutlet="tmplNode,context:{node:child}"></ng-container>
+                            <div *ngFor="let child of node.children" cdkDrag [cdkDragData]="child.id" (click)="
+                  selectSingleEquipment(child.key); $event.stopPropagation()
+                " (cdkDragMoved)="dragMoved($event)">
+                                <ng-container *ngTemplateOutlet="tmplNode; context: { node: child }"></ng-container>
                             </div>
-
                         </div>
-
                     </div>
                 </ng-template>
 
                 <div cdkDropList [cdkDropListData]="nodes" [id]="'main'" [cdkDropListConnectedTo]="dropTargetIds" (cdkDropListDropped)="drop($event)" [cdkDropListSortingDisabled]="true">
-
-                    <div *ngFor="let node of nodes" cdkDrag [cdkDragData]="node.id" (click)='selectSingleEquipment(node.key); $event.stopPropagation()' (cdkDragMoved)="dragMoved($event)">
-
-                        <ng-container *ngTemplateOutlet="tmplNode,context:{node:node}"></ng-container>
-
+                    <div *ngFor="let node of nodes" cdkDrag [cdkDragData]="node.id" (click)="selectSingleEquipment(node.key); $event.stopPropagation()" (cdkDragMoved)="dragMoved($event)">
+                        <ng-container *ngTemplateOutlet="tmplNode; context: { node: node }"></ng-container>
                     </div>
                 </div>
             </div>
@@ -71,48 +69,88 @@
                     </div>
                     <div>
                         <label for="regulatory-name">Regulatory Name</label
-            ><input type="text" id="regulatory-name" name='regulatory-name' [(ngModel)]='this.selectedNode?.details.equipmentRegulatoryName' />
+            ><input
+              type="text"
+              id="regulatory-name"
+              name="regulatory-name"
+              [(ngModel)]="this.selectedNode?.details.equipmentRegulatoryName"
+            />
           </div>
           <div>
             <label for="commercial-name">Commercial Name</label
-            ><input type="text" id='commercial-name' name='commercial-name' [(ngModel)]='this.selectedNode?.details.commercialName' />
+            ><input
+              type="text"
+              id="commercial-name"
+              name="commercial-name"
+              [(ngModel)]="this.selectedNode?.details.commercialName"
+            />
           </div>
           <div>
             <label for="function-of-the-equipment"
               >Function Of The Equipment</label
-            ><input type="text" id="function-of-the-equipment" name='function-of-the-equipment' [(ngModel)]='this.selectedNode?.details.functionOfTheEquipment' />
+            ><input
+              type="text"
+              id="function-of-the-equipment"
+              name="function-of-the-equipment"
+              [(ngModel)]="this.selectedNode?.details.functionOfTheEquipment"
+            />
           </div>
           <div>
             <label for="name-of-the-manufacturer"
               >Name Of The Manufacturer</label
-            ><input type="text" id="name-of-the-manufacturer" name='name-of-the-manufacturer' [(ngModel)]='this.selectedNode?.details.nameOfTheManufacturer' />
+            ><input
+              type="text"
+              id="name-of-the-manufacturer"
+              name="name-of-the-manufacturer"
+              [(ngModel)]="this.selectedNode?.details.nameOfTheManufacturer"
+            />
           </div>
           <div>
             <label for="address-of-the-manufacturer"
               >Address Of The Manufacturer</label
-            ><input type="text" id="address-of-the-manufacturer" name='address-of-the-manufacturer' [(ngModel)]='this.selectedNode?.details.addressOfTheManufacturer' />
+            ><input
+              type="text"
+              id="address-of-the-manufacturer"
+              name="address-of-the-manufacturer"
+              [(ngModel)]="this.selectedNode?.details.addressOfTheManufacturer"
+            />
           </div>
           <div>
             <label for="year-of-manufacture">Year Of Manufacture</label
-            ><input type="number" id="year-of-manufacture" name='year-of-manufacture' [(ngModel)]='this.selectedNode?.details.yearOfManufacture' />
+            ><input
+              type="number"
+              id="year-of-manufacture"
+              name="year-of-manufacture"
+              [(ngModel)]="this.selectedNode?.details.yearOfManufacture"
+            />
           </div>
         </form>
       </div>
     </div>
+
+    <div class="button-container">
+      <app-blue-button [btnType]='["ghostBtn", "btn-lg"]'>Save &amp; Continue Later</app-blue-button>
+      <app-blue-button [btnType]='["normalBtn", "btn-lg"]'>Next</app-blue-button>
+  </div>
   </div>
 </div>
 
-
-    <sui-modal [isClosable]="true" [size]='"mini"' (dismissed)="show = false" *ngIf='show' #modal>
-        <div class="header">New Equipment</div>
-        <div class="content">
-            <form (ngSubmit)='createNewEquipment(form); show = false' #form='ngForm'>
-                <div>
-                    <label for="new-equipment-label">Equipment Regulatory Name</label>
-                        <input type="text" name='equipmentRegulatoryName' ngModel>
+<sui-modal
+  [isClosable]="true"
+  [size]="'mini'"
+  (dismissed)="show = false"
+  *ngIf="show"
+  #modal
+>
+  <div class="header">New Equipment</div>
+  <div class="content">
+    <form (ngSubmit)="createNewEquipment(form); show = false" #form="ngForm">
+      <div>
+        <label for="new-equipment-label">Equipment Regulatory Name</label>
+                        <input type="text" name="equipmentRegulatoryName" ngModel />
                     </div>
                     <div class="button-container">
-                        <app-blue-button [btnType]='["ghostBtn", "btn-md"]'>Done</app-blue-button>
+                        <app-blue-button [btnType]="['ghostBtn', 'btn-md']">Done</app-blue-button>
                     </div>
                 </form>
             </div>
@@ -121,11 +159,13 @@
             <button class="ui green button" (click)="modal.approve('done')">OK</button>
         </div> -->
             </sui-modal>
-            <sui-modal [isClosable]="true" [size]='"mini"' (dismissed)="hideNodeOptionsModal()" *ngIf='showNodeOptions' #modal>
+            <sui-modal [isClosable]="true" [size]="'mini'" (dismissed)="hideNodeOptionsModal()" *ngIf="showNodeOptions" #modal>
                 <div class="content">
-                    <div (click)='showAddEquipmentModal()' class='node-option'>ADD EQUIPMENT HERE</div>
-                    <div (click)='duplicateEquipment()' class='node-option'>DUPLICATE</div>
-                    <div (click)='deleteEquipment()' class='node-option'>DELETE</div>
+                    <div (click)="showAddEquipmentModal()" class="node-option">
+                        ADD EQUIPMENT HERE
+                    </div>
+                    <div (click)="duplicateEquipment()" class="node-option">DUPLICATE</div>
+                    <div (click)="deleteEquipment()" class="node-option">DELETE</div>
                 </div>
                 <!-- <div class="actions">
             <button class="ui red button" (click)="modal.deny()">Cancel</button>

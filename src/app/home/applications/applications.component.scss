@@ -1,27 +1,28 @@
 $border: 1px solid rgba(196, 196, 196, 0.92);
 $labelColor: #666060;
+@mixin small-screen {
+    @media screen and (max-width: 768px) {
+        @content;
+    }
+}
+
 .panel {
     padding: 20px 10px;
     display: flex;
     justify-content: space-between;
     background: rgba(196, 196, 196, 0.08);
+    margin-top: 0;
     .forms-container {
         display: flex;
-        >div:not(:first-child) {
-            margin-left: 20px;
+        @include small-screen {
+            display: flow-root;
         }
-        .input-container {
-            border: $border;
-            border-radius: 4px;
+        >div:not(:first-child) {
             display: flex;
-            height: 26px;
-            padding-right: 5px;
-            align-self: center;
-            input {
-                border: none;
-                background: none;
-                padding-left: 5px;
-                outline: none;
+            margin-left: 20px;
+            @include small-screen {
+                margin-left: 0;
+                margin-top: 15px;
             }
         }
         .display {
@@ -55,6 +56,8 @@ $labelColor: #666060;
         }
     }
     .button-container {
+        display: flex;
+        align-content: flex-end;
         >:first-child {
             margin-right: 15px;
         }

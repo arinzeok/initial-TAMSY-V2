@@ -1,48 +1,59 @@
 <div class="main">
-    <div class='info'>
-        <div class="certificate-holder">
-            <label>Certificate Holder</label>
-            <span class="certficate-holder-name">Cicso Systems, Inc.</span>
+    <div class="ui stackable container grid">
+        <div class="info nine wide column">
+            <div class="certificate-holder">
+                <label>Certificate Holder</label>
+                <span class="certficate-holder-name">Cicso Systems, Inc.</span>
+            </div>
+            <div class="ui large list horizontal divided">
+                <div class="item">
+                    <div class="content">
+                        <div class="list-heading">Application Id</div>
+                        <span class="application-id">0000-0000-1023</span>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="content">
+                        <div class="list-heading">No. Of Equipment</div>
+                        <span class="">4</span>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="content">
+                        <div class="list-heading">Application stage</div>
+                        <span class="ui grey label">Submission</span>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="content">
+                        <div class="list-heading">Application Id</div>
+                        <span class="ui yellow label">Ongoing</span>
+                    </div>
+                </div>
+            </div>
+            <div class="date-created">
+                <img src="assets/icons/time-icon.svg" alt="" srcset="" /> Created on April 7th 2020 by Wonder Marley
+            </div>
         </div>
-        <div>
-            <ul>
-                <li>
-                    <label>Application Id</label>
-                    <span class='application-id'>0000-0000-1023</span>
-                </li>
-                <li>
-                    <label>No. Of Equipment</label>
-                    <span>4</span>
-                </li>
-                <li>
-                    <label>Application stage</label>
-                    <span class="pill grey">Submission</span>
-                </li>
-                <li>
-                    <label>Application Id</label>
-                    <span class="pill gold">Ongoing</span>
-                </li>
-            </ul>
-        </div>
-        <div class="date-created">
-            <img src="assets/icons/time-icon.svg" alt="" srcset=""> Created on April 7th 2020 by Wonder Marley
-        </div>
-    </div>
-    <div class="buttons">
-        <div class="notification">
-            <img src="assets/icons/notification-icon.svg" alt="">
-            <div class="notification-count">0</div>
-        </div>
+        <div class="buttons seven wide column float-right">
+            <div class="notification">
+                <img src="assets/icons/notification-icon.svg" alt="" />
+                <div class="notification-count">0</div>
+            </div>
 
-        <app-blue-button [btnType]='["ghostBtn"]'>
-            View Documentation
-        </app-blue-button>
+            <app-blue-button [btnType]="['ui', 'primary', 'basic', 'button']">
+                View Documentation
+            </app-blue-button>
 
-        <select name="application-action" id="">
-          <option>Action</option>
-          <option>option 1</option>
-          <option>option 2</option>
-          <option>option 3</option>
-        </select>
+            <div class="ui dropdown eServiceDropdown primary basic button" suiDropdown>
+                <div class="text">Action</div>
+                <i class="dropdown icon"></i>
+                <div class="menu" suiDropdownMenu>
+                    <div class="item">Applications</div>
+                    <div class="item">International Students</div>
+                    <div class="item">Scholarships</div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

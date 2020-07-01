@@ -1,39 +1,32 @@
 <!-- Navbar -->
 <nav>
     <div class="top">
-        <div class="container">
+        <div class="container ui">
             <!-- Logo -->
             <div class="logo-container">
-                <img class="logo" routerLink='/home/applications' src="assets/icons/ncc-logo.svg" alt="" />
+                <img class="logo" routerLink="/home/applications" src="assets/icons/ncc-logo.svg" alt="" />
             </div>
 
             <!-- Links -->
             <div class="nav">
-                <!-- eServices App links list -->
-                <div class="eServices-app">
-                    <select name="" id="">
-  <option>eServices Apps</option>
-  <option>Link 1</option>
-  <option>Link 2</option>
-  <option>Link 3</option>
-</select>
+                <div class="ui dropdown eServiceDropdown" suiDropdown>
+                    <div class="text">eService app</div>
+                    <i class="dropdown icon"></i>
+                    <div class="menu" suiDropdownMenu>
+                        <div class="item">Applications</div>
+                        <div class="item">International Students</div>
+                        <div class="item">Scholarships</div>
+                    </div>
                 </div>
 
-                <!-- Profile -->
-                <div class='profile'>
-                    <!-- Profile links list -->
-                    <div>
-                        <select name="" id="">
-    <option>Profile</option>
-    <option>Link 1</option>
-    <option>Link 2</option>
-    <option>Link 3</option>
-  </select>
-                    </div>
-
-                    <!-- Profile icon -->
-                    <div class="profile-icon">
-                        <img src="assets/icons/User-Profile-Image.svg" alt="" srcset="">
+                <div class="ui dropdown" suiDropdown>
+                    <div class="text">Profile</div>
+                    <i class="dropdown icon"></i>
+                    <img src="assets/icons/User-Profile-Image.svg" />
+                    <div class="menu" suiDropdownMenu>
+                        <div class="item">Applications</div>
+                        <div class="item">International Students</div>
+                        <div class="item">Scholarships</div>
                     </div>
                 </div>
             </div>
@@ -41,17 +34,16 @@
     </div>
 
     <div class="bottom">
-        <div class="container">
+        <div class="container ui">
             <div>Type Approval Management</div>
             <div class="company-name">
-                <img src="assets/icons/company-icon.svg" alt="" srcset=""> Relithub Nigeria Limited</div>
+                <img src="assets/icons/company-icon.svg" alt="" srcset="" /> Relithub Nigeria Limited
+            </div>
         </div>
     </div>
 </nav>
 <div>
-
     <router-outlet></router-outlet>
-
 </div>
 
 <app-footer></app-footer>

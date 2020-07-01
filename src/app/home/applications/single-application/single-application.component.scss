@@ -5,12 +5,6 @@
     padding: 10px 0;
     border-bottom: 1px solid #DADADA;
     .info {
-        label {
-            text-transform: uppercase;
-            color: #9C9C9C;
-            font-size: 12px;
-            margin-bottom: 5px;
-        }
         span.certficate-holder-name {
             color: #1F5FBE;
             font-weight: normal;
@@ -19,7 +13,10 @@
             margin-top: 10px;
             margin-bottom: 10px;
         }
-        ul {
+        .application-id {
+            color: #1F5FBE;
+        }
+        /* ul {
             list-style: none;
             display: flex;
             justify-content: space-between;
@@ -62,7 +59,7 @@
             li:not(:last-child) {
                 border-right: 1px solid rgba(196, 196, 196, 0.92);
             }
-        }
+        } */
         .date-created {
             margin-top: 10px;
             color: #9C9C9C;
@@ -72,6 +69,12 @@
                 margin-right: 5px;
             }
         }
+    }
+    div.list-heading {
+        text-transform: uppercase;
+        color: #9C9C9C;
+        font-size: 12px;
+        margin-bottom: 5px;
     }
     .buttons {
         margin-top: 45px;
@@ -93,6 +96,7 @@
             position: relative;
             display: inline-block;
             align-self: center;
+            margin-left: auto;
             .notification-count {
                 position: absolute;
                 top: -10px;

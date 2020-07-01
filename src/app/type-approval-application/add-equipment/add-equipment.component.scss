@@ -268,3 +268,12 @@ button.add-equipment {
     font-size: 18px;
     border: 1px solid transparent;
 }
+
+.button-container {
+    display: flex;
+    margin-top: 50px;
+    > :first-child {
+        margin-left: auto;
+        margin-right: 15px;
+    }
+}
