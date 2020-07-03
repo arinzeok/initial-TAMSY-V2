@@ -1,0 +1,56 @@
+<div class="ui bottom vertical basic segment tab active no-padding">
+    <div class="basic fill segment ui top attached sd">
+        <div class='panel ui grid two stackable column'>
+            <div class='column' style='width: 50%;'>
+                <span>
+        <div class="ui mini icon input" style='margin: 5px;'>
+            <input type="text" placeholder="Search mini...">
+            <i class="search icon"></i>
+        </div>
+      </span>
+                <span class="ui mini icon input" style='margin: 5px;'>
+            <label>
+              Display
+            <select class="ui mini search dropdown" #select>
+              <option value="">State</option>
+              <option value="AL">Alabama</option>
+              <option value="AK">Alaska</option>
+              <option value="AZ">Arizona</option>
+              <option value="AR">Arkansas</option>
+              <option value="CA">California</option>
+              <option value="CO">Colorado</option>
+              <option value="CT">Connecticut</option>
+            </select> Rows
+            </label>
+        </span>
+            </div>
+            <div class='column' style='width: 50%; display: flex; justify-content: flex-end;'>
+                <app-blue-button [btnType]='["ui", "primary", "basic", "button"]' class="five column wide">
+                    Advanced Search
+                </app-blue-button>
+                <app-blue-button [btnType]='["ui", "primary", "button"]' class="six column wide" routerLink='/contractor/home/type-approval-application/get-started'>
+                    Apply for Type Approval
+                </app-blue-button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class='ui segment'>
+    <app-single-application></app-single-application>
+</div>
+
+<div class="ui two column grid stackable">
+    <div class="column middle aligned">
+        <div class="ui medium labeled button">
+            <div class="ui icon button">
+                <i class="database icon"></i>
+            </div>
+            <a class='ui basic label'>3 Record(s)</a>
+        </div>
+    </div>
+    <div class="column right aligned pagination menu">
+        <sui-pagination [collectionSize]="10" [pageSize]="5" [maxSize]="5" [hasEllipses]="true">
+        </sui-pagination>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+<div class="container main ui">
+
+    <!-- <app-navigation>
+        <ul>
+            <li routerLink='/home/type-approval-application/select-certificate-holder' routerLinkActive='active'>Select Certificate Holder</li>
+            <li>Add Equipment</li>
+            <li>Upload Equipment Document</li>
+            <li>Add Specification Standards</li>
+            <li>Review and Submit</li>
+        </ul>
+    </app-navigation> -->
+
+    <sui-tabset>
+        <div class="ui pointing secondary menu stackable grid">
+            <a class="item" routerLink='/contractor/home/type-approval-application/select-certificate-holder' routerLinkActive='active'>Select Certificate Holder</a>
+            <a class="item" routerLink='/contractor/home/type-approval-application/add-equipment' routerLinkActive='active'>Add Equipment</a>
+            <a class="item">Upload Equipment Document</a>
+            <a class="item">Add Specification Standards</a>
+            <a class="item">Review and Submit</a>
+        </div>
+    </sui-tabset>
+
+    <router-outlet></router-outlet>
+</div>

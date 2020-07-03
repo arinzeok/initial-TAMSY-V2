@@ -8,6 +8,12 @@
     src: url('src/assets/fonts/Roboto/Roboto-Medium.ttf');
 }
 
+@mixin small-screen {
+    @media screen and (max-width: 768px) {
+        @content;
+    }
+}
+
 .container {
     padding: 0;
     padding-bottom: 40px;
@@ -15,7 +21,6 @@
 
 .main {
     margin-top: 45px;
-    width: 80vw;
     .info {
         .info-header-container {
             .header {
@@ -39,7 +44,6 @@
     }
     form {
         margin-top: 40px;
-        width: 90%;
         >div {
             margin-bottom: 20px;
         }
@@ -54,11 +58,8 @@
             background-color: #18A0FB;
         }
         label {
-            display: grid;
-            grid-template-columns: 0.1fr 0.76fr;
             align-items: center;
             color: #9C9C9C;
-            border: 1px solid rgba(196, 196, 196, 0.92);
             border-radius: 10px;
             padding: 10px 0;
             cursor: pointer;
@@ -100,6 +101,12 @@
                     border-left: 1px solid #9C9C9C;
                     align-self: center;
                     padding: 20px 30px;
+                    @include small-screen {
+                        border-top: 1px solid #9C9C9C;
+                        border-left: none;
+                        margin-left: 16px;
+                        padding-left: 0;
+                    }
                 }
                 div.detail {
                     color: #666060;

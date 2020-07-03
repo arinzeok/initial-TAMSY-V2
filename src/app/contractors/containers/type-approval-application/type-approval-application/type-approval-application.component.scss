@@ -10,25 +10,20 @@ app-navigation ul {
     border-bottom: 2px solid rgba(196, 196, 196, 0.92);
     margin: 0;
     padding: 0;
-    overflow-x: scroll;
-    overflow-y: hidden;
     li {
         padding: 10px 30px;
         border-bottom: 3px solid transparent;
         cursor: pointer;
         color: #666060;
-        font-size: 18px;
+        font-size: 14px;
+        white-space: nowrap;
         position: relative;
         top: 2px;
-    }
-    li.active {
-        border-bottom-color: $active-link;
-        color: $active-link;
-        font-weight: bold;
+        // pointer-events: none;
     }
 }
 
-a.active {
+.ui.secondary.pointing.menu .active.item {
     border-bottom-color: $active-link;
     color: $active-link;
     font-weight: bold;

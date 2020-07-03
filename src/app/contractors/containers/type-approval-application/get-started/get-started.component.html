@@ -1,14 +1,14 @@
 <div class="container">
 
     <div class="main">
-        <div class="info-header-container">
+        <div class="container grid info-header-container stackable ui">
             <div class="header">Get started with your Type Approval Application</div>
-            <div class="sub-header">Follow the steps below to complete your type approval application. You can apply to type approve multiple equipment for a Certificate Holder at the same time.</div>
+            <div class="column sub-header ten wide">Follow the steps below to complete your type approval application. You can apply to type approve multiple equipment for a Certificate Holder at the same time.</div>
         </div>
 
-        <div class="info">
+        <div class="info container ui stackable four column grid">
 
-            <div class="info-body">
+            <div class="info-body column ten wide">
                 <ul>
                     <li> <span>1</span> Select a Certificate Holder’s profile from the list of profiles you have created.</li>
                     <li> <span>2</span> Add the equipment you want to type approve. You can add more than one equipment and categorize them accordingly.</li>
@@ -18,15 +18,15 @@
                 </ul>
             </div>
 
-            <div class="image-container">
-                <img src="assets/images/Comms-Icon-Group.png" alt="" srcset="">
+            <div class="image-container column">
+                <img src="assets/images/Comms-Icon-Group.png" class='ui image' alt="" srcset="">
             </div>
         </div>
     </div>
 
-    <div style="display: flex; margin-top: 30px;">
+    <div style="display: flex; margin-top: 30px;" class='container ui'>
         <div class='button-container'>
-            <app-blue-button [btnType]='["normalBtn", "btn-lg"]' routerLink='/home/type-approval-application/select-certificate-holder'>
+            <app-blue-button [btnType]='["ui", "primary", "massive", "button"]' routerLink='/contractor/home/type-approval-application/select-certificate-holder'>
                 Get Started!
             </app-blue-button>
             <div class="not-right-now">Not right now</div>

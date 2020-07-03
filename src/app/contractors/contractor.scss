@@ -1,0 +1,71 @@
+$NCC-blue: linear-gradient(180deg, #010165 0%, rgba(1, 1, 101, 0.81) 129.99%);
+@mixin small-screen {
+    @media screen and (max-width: 768px) {
+        @content;
+    }
+}
+
+nav {
+    .top {
+        padding-top: 40px;
+        padding-bottom: 40px;
+        background: $NCC-blue;
+        img {
+            cursor: pointer;
+            @include small-screen {
+                height: 23px;
+            }
+        }
+        >div {
+            display: flex;
+            justify-content: space-between;
+        }
+        .nav {
+            display: flex;
+            align-items: center;
+            select {
+                border: none;
+                background: none;
+                color: #fff;
+            }
+            .eServices-app {
+                margin-right: 30px;
+            }
+            .profile {
+                display: flex;
+                align-items: center;
+            }
+        }
+        .eServiceDropdown {
+            margin-right: 30px;
+        }
+        .dropdown {
+            margin-left: 17px;
+            .text,
+            i {
+                color: #fff;
+            }
+            img {
+                margin-left: 15px;
+            }
+        }
+    }
+    .bottom {
+        background: $NCC-blue;
+        color: #fff;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        >div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .company-name {
+            align-items: flex-end;
+            display: flex;
+            img {
+                margin-right: 10px;
+            }
+        }
+    }
+}

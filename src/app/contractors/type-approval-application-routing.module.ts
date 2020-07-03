@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { GetStartedComponent } from './get-started/get-started.component';
-import { TypeApprovalApplicationComponent } from './type-approval-application/type-approval-application.component';
-import { SelectCertificateHolderComponent } from './select-certificate-holder/select-certificate-holder.component';
-import { AddEquipmentComponent } from './add-equipment/add-equipment.component';
+import { GetStartedComponent } from './containers/type-approval-application/get-started/get-started.component';
+import { TypeApprovalApplicationComponent } from './containers/type-approval-application/type-approval-application/type-approval-application.component';
+import { SelectCertificateHolderComponent } from './containers/type-approval-application/select-certificate-holder/select-certificate-holder.component';
+import { AddEquipmentComponent } from './containers/type-approval-application/add-equipment/add-equipment.component';
 
 
 const routes: Routes = [

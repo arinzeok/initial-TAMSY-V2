@@ -1,10 +1,10 @@
-<div class="container">
+<div class="container ui">
     <div class="main">
         <div class="info">
             <div class="info-header-container">
-                <div class="header">
+                <h3 class="header">
                     Select a Certificate Holder’s profile from the list of profiles you created.
-                </div>
+                </h3>
                 <div class="sub-header">
                     A Certificate Holder profile allows you to enter and save the details of a Certificate Holder so that you don’t have to enter the details each time you want to make an application. If you have not created a Certificate Profile for this Application,
                     <a>click here to create a profile.</a>
@@ -14,15 +14,15 @@
 
         <form ngForm>
             <div>
-                <input required value="1" type="radio" name="select-certificate-holder" id="select-certificate-holder1" ngModel #input='ngModel' />
-                <label for="select-certificate-holder1">
+                <input required value="1" type="radio" name="select-certificate-holder" id="select-certificate-holder1" ngModel #input="ngModel" />
+                <label for="select-certificate-holder1" class="ui segment grid">
           <div>
             <div class="custom-radio-icon">
               <div class="custom-radio-icon-inner"></div>
             </div>
           </div>
-          <div class="detail-container">
-            <div>
+          <div class="detail-container grid stackable ui">
+            <div class="column ten wide">
               <div>
                 <span>Certificate Holder</span>
                 <h3>Cisco Systems, Inc.</h3>
@@ -42,15 +42,15 @@
         </label>
             </div>
             <div>
-                <input required value="2" type="radio" name="select-certificate-holder" id="select-certificate-holder" ngModel #input2='ngModel' />
-                <label for="select-certificate-holder">
+                <input required value="2" type="radio" name="select-certificate-holder" id="select-certificate-holder" ngModel #input2="ngModel" />
+                <label for="select-certificate-holder" class="ui segment grid">
           <div>
             <div class="custom-radio-icon">
               <div class="custom-radio-icon-inner"></div>
             </div>
           </div>
-          <div class="detail-container">
-            <div>
+          <div class="detail-container grid stackable ui">
+            <div class="column ten wide">
               <div>
                 <span>Certificate Holder</span>
                 <h3>Cisco Systems, Inc.</h3>
@@ -69,9 +69,25 @@
           </div>
         </label>
             </div>
-            <div class="button-container">
-                <app-blue-button [btnType]='["ghostBtn", "btn-lg"]'>Save &amp; Continue Later</app-blue-button>
-                <app-blue-button [btnType]='["normalBtn", "btn-lg"]'>Next</app-blue-button>
+            <div class="ui two column grid stackable">
+                <div class="column middle aligned">
+                    <div class="ui medium labeled button">
+                        <div class="ui icon button">
+                            <i class="database icon"></i>
+                        </div>
+                        <a class='ui basic label'>3 Record(s)</a>
+                    </div>
+                </div>
+                <div class="column right aligned pagination menu">
+                    <sui-pagination [collectionSize]="10" [pageSize]="5" [maxSize]="5" [hasEllipses]="true">
+                    </sui-pagination>
+                </div>
+            </div>
+            <div class="ui grid stackable">
+                <div class="row" style="justify-content: flex-end;">
+                    <app-blue-button [btnType]="['ui', 'primary', 'massive', 'button', 'basic']">Save &amp; Continue Later</app-blue-button>
+                    <app-blue-button [btnType]="['ui', 'primary', 'massive', 'button']">Next</app-blue-button>
+                </div>
             </div>
         </form>
     </div>

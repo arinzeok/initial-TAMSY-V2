@@ -1,19 +1,17 @@
 <div class="main">
-    <div class="top">
-        <div class="certificate-holder-details">
-            <div class="certificate-holder-name">
+    <div class="container grid stackable top ui">
+        <div class="certificate-holder-details column container row segment stackable twelve wide">
+            <div class="certificate-holder-name column eight wide">
                 <label>Certificate Holder</label>
                 <div>Huawei Technologies Co., Ltd.</div>
             </div>
-            <div class="certificate-holder-address">
+            <div class="certificate-holder-address column eight wide">
                 <label>Address</label>
                 <div>One Apple Park Way Cupertino, CA 95014, USA</div>
             </div>
             <div></div>
         </div>
-        <button (click)="showAddEquipmentModal()" class="add-equipment">
-      Add Equipment
-    </button>
+        <app-blue-button (click)="showAddEquipmentModal()" [btnType]="['primary', 'button', 'massive', 'ui']" class='column four wide'>Add Equipment</app-blue-button>
     </div>
     <div class="bottom">
         <div class="info-panel" *ngIf="!this.nodes.length">
@@ -26,8 +24,8 @@
             <img src="assets/icons/wb-incandescent.svg" alt="" /> Select an equipment below and enter its details in the panel on the right
         </div>
 
-        <div class="grid">
-            <div class="left">
+        <div class="form grid ui container stackable" style='justify-content: space-between; margin-top: 7px;'>
+            <div class="node-container column seven wide">
                 <ng-template #tmplNode let-node="node">
                     <div class="node-item" [attr.data-id]="node.id" [attr.id]="'node-' + node.id">
                         <div class="node-title single-equipment-box" [ngClass]="{ active: selectedNode?.key === node.key }" (click)="node.isExpanded = !node.isExpanded">
@@ -56,7 +54,7 @@
                     </div>
                 </div>
             </div>
-            <div class="right">
+            <div class="form-container column seven wide">
                 <form>
                     <div>
                         <label for="equipment-type">Equipment Type</label>
@@ -128,10 +126,17 @@
       </div>
     </div>
 
-    <div class="button-container">
-      <app-blue-button [btnType]='["ghostBtn", "btn-lg"]'>Save &amp; Continue Later</app-blue-button>
-      <app-blue-button [btnType]='["normalBtn", "btn-lg"]'>Next</app-blue-button>
-  </div>
+    <div class="ui grid stackable" style="margin-top: 96px;">
+      <div class="row" style="justify-content: flex-end;">
+        <app-blue-button
+          [btnType]="['ui', 'primary', 'massive', 'button', 'basic']"
+          >Save &amp; Continue Later</app-blue-button
+        >
+        <app-blue-button [btnType]="['ui', 'primary', 'massive', 'button']"
+          >Next</app-blue-button
+        >
+      </div>
+    </div>
   </div>
 </div>
 
