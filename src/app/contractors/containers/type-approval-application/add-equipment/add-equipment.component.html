@@ -11,10 +11,10 @@
             </div>
             <div></div>
         </div>
-        <app-blue-button (click)="showAddEquipmentModal()" [btnType]="['primary', 'button', 'massive', 'ui']" class='column four wide'>Add Equipment</app-blue-button>
+        <app-blue-button (click)="showAddEquipmentModal(true)" [btnType]="['primary', 'button', 'massive', 'ui']" class='column four wide'>Add Equipment</app-blue-button>
     </div>
     <div class="bottom">
-        <div class="info-panel" *ngIf="!this.nodes.length">
+        <div class="info-panel" *ngIf="!this.equipmentListService.nodes.length">
             <div class="img-container">
                 <img src="assets/icons/Info Panel.svg" alt="" />
                 <img src="assets/icons/Info Arrow.svg" alt="" />
@@ -48,8 +48,8 @@
                     </div>
                 </ng-template>
 
-                <div cdkDropList [cdkDropListData]="nodes" [id]="'main'" [cdkDropListConnectedTo]="dropTargetIds" (cdkDropListDropped)="drop($event)" [cdkDropListSortingDisabled]="true">
-                    <div *ngFor="let node of nodes" cdkDrag [cdkDragData]="node.id" (click)="selectSingleEquipment(node.key); $event.stopPropagation()" (cdkDragMoved)="dragMoved($event)">
+                <div cdkDropList [cdkDropListData]="this.equipmentListService.nodes" [id]="'main'" [cdkDropListConnectedTo]="dropTargetIds" (cdkDropListDropped)="drop($event)" [cdkDropListSortingDisabled]="true">
+                    <div *ngFor="let node of this.equipmentListService.nodes" cdkDrag [cdkDragData]="node.id" (click)="selectSingleEquipment(node.key); $event.stopPropagation()" (cdkDragMoved)="dragMoved($event)">
                         <ng-container *ngTemplateOutlet="tmplNode; context: { node: node }"></ng-container>
                     </div>
                 </div>
@@ -126,7 +126,7 @@
       </div>
     </div>
 
-    <div class="ui grid stackable" style="margin-top: 96px;">
+    <div class="ui grid stackable container" style="margin-top: 96px;">
       <div class="row" style="justify-content: flex-end;">
         <app-blue-button
           [btnType]="['ui', 'primary', 'massive', 'button', 'basic']"
@@ -155,7 +155,7 @@
                         <input type="text" name="equipmentRegulatoryName" ngModel />
                     </div>
                     <div class="button-container">
-                        <app-blue-button [btnType]="['ghostBtn', 'btn-md']">Done</app-blue-button>
+                        <app-blue-button [btnType]="['basic', 'primary', 'ui', 'button']">Done</app-blue-button>
                     </div>
                 </form>
             </div>

@@ -60,14 +60,10 @@
         }
         .node-container {
             background: rgba(196, 196, 196, 0.08);
-            overflow-y: scroll;
-            i {
-                color: #000;
-            }
         }
         .form-container {
             background: rgba(196, 196, 196, 0.08);
-            padding: 0 60px;
+            height: 100%;
             form {
                 width: 100%;
                 height: 100%;
@@ -161,23 +157,16 @@ form {
 }
 
 .single-equipment-box {
-    color: #18a0fb;
     padding: 5px 15px;
     display: flex;
     margin-top: 20px;
     margin-bottom: 20px;
     align-items: center;
-    font-size: 16px;
+    font-size: 20px;
     cursor: pointer;
-    img.node-handle-icon {
-        margin-right: 30px;
-        visibility: hidden;
-        cursor: grab;
-    }
-    img.node-menu-icon {
-        margin-left: auto;
-        visibility: hidden;
-        cursor: pointer;
+    label {
+        font-size: 16px !important;
+        color: #666060 !important;
     }
 }
 
@@ -194,7 +183,6 @@ form {
 
 .node-option {
     margin-bottom: 20px;
-    cursor: pointer;
 }
 
 .placeholder {
@@ -214,18 +202,39 @@ form {
     }
 }
 
-.single-equipment-box-container.cdk-drag-preview {
-    // background: #93d4ff;
-    box-sizing: border-box;
-    cursor: grabbing;
-    border-radius: 4px;
-    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
-    .node-handle-icon,
-    .node-menu-icon {
-        visibility: visible;
+.document-container.active {
+    background-color: rgba(196, 196, 196, 0.19);
+}
+
+.document-container {
+    cursor: pointer;
+    padding: 15px 7px;
+    border-bottom: 1px solid #dadada;
+    >div {
+        width: 85%;
+        color: #666060;
     }
-    .single-equipment-box {
-        margin-top: 0;
+    i {
+        color: #000;
+        font-size: 30px;
+    }
+}
+
+.equipmentDocumentList {
+    padding-top: 25px;
+    .heading {
+        font-size: 20px;
+        margin-bottom: 20px;
+        color: #666060;
+        .equipmentName {
+            color: #000;
+            font-weight: bold;
+        }
+    }
+    .document {
+        padding: 15px 7px;
+        border-bottom: 1px solid #dadada;
+        font-size: 21px;
     }
 }
 
@@ -233,46 +242,8 @@ form {
     height: 100%;
 }
 
-.cdk-drag-placeholder {
-    opacity: 0;
-    /* background: #ccc;
-    border: dotted 3px #999;
-    height: 0;
-    padding: 10px 15px;
-    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1); */
-    //display: none;
-}
-
-.drop-inside {
-    border: 1px solid #00f;
-}
-
-.drop-before {
-    border-top: 1px solid #00f;
-}
-
-.drop-after {
-    border-bottom: 1px solid #00f;
-}
-
-.cdk-drag-animating {
-    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-}
-
-.example-box:last-child {
-    border: none;
-}
-
-.example-list.cdk-drop-list-dragging .single-equipment-box:not(.cdk-drag-placeholder) {
-    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-}
-
 .single-equipment-box.active {
     background: #93d4ff;
-    .node-handle-icon,
-    .node-menu-icon {
-        display: block;
-    }
 }
 
 button.add-equipment {
@@ -294,4 +265,42 @@ button.add-equipment {
         margin-left: auto;
         margin-right: 15px;
     }
+}
+
+.drop-zone {
+    border: rgba(196, 196, 196, 0.92) 2px dashed;
+    height: 15vh;
+    width: 100%;
+    background-color: #fff;
+    >div,
+    label {
+        font-family: RobotoLight, sans-serif;
+        font-size: 24px;
+        text-align: center;
+    }
+}
+
+.fileover {
+    border-color: blue;
+}
+
+.no-file {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    div {
+        font-weight: 900;
+        font-size: 36px;
+        color: #DADADA;
+        width: 70%;
+        line-height: 1.5em;
+        text-align: center;
+    }
+}
+
+.document-name {
+    font-size: 21px;
+    font-weight: bold;
 }

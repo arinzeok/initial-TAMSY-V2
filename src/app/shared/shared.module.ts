@@ -4,11 +4,17 @@ import { FormsModule } from '@angular/forms';
 import { NavigationComponent } from './navigation/navigation.component';
 import { BlueButtonComponent } from './blue-button/blue-button.component';
 import { ModalComponent } from './modal/modal.component';
+import { FooterComponent } from '../footer/footer.component';
 
 
 
 @NgModule({
-  declarations: [NavigationComponent, BlueButtonComponent, ModalComponent],
+  declarations: [
+    NavigationComponent,
+    BlueButtonComponent,
+    ModalComponent,
+    FooterComponent
+  ],
   imports: [
     CommonModule,
     FormsModule
@@ -16,7 +22,8 @@ import { ModalComponent } from './modal/modal.component';
   exports: [
     NavigationComponent,
     BlueButtonComponent,
-    ModalComponent
+    ModalComponent,
+    FooterComponent
   ]
 })
 export class SharedModule { }

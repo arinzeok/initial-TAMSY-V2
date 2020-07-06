@@ -13,6 +13,7 @@ import { debounce } from '@agentepsilon/decko';
 import { DndDropEvent } from 'ngx-drag-drop';
 import {SuiModalService, TemplateModalConfig, ModalTemplate} from 'ng2-semantic-ui';
 import { singleEquipmentNode } from 'src/app/core/models/singleEquipment';
+import { EquipmentListService } from 'src/app/core/service/equipment-list.service';
 
 export interface IContext {
   data: string;
@@ -28,10 +29,6 @@ export class AddEquipmentComponent implements OnInit {
   @ViewChild('modalTemplate')
   public modalTemplate: ModalTemplate<IContext, string, string>;
 
-  arrayOfCreatedEquipmentKeys = [];
-
-  nodes = [];
-
     // ids for connected drop lists
     dropTargetIds = [];
     nodeLookup = {};
@@ -42,8 +39,12 @@ export class AddEquipmentComponent implements OnInit {
   selectedNodeId: string;
   containerToDeleteFromId: any;
 
-    constructor(@Inject(DOCUMENT) private document: Document, public modalService: SuiModalService) {
-        this.prepareDragDrop(this.nodes);
+    constructor(@Inject(DOCUMENT) private document: Document,
+                public modalService: SuiModalService,
+                public equipmentListService: EquipmentListService) {
+        this.prepareDragDrop(this.equipmentListService.nodes);
+        // this.arrayOfCreatedEquipmentKeys = this.equipmentListService.arrayOfCreatedEquipmentKeys;
+        // this.nodes = this.equipmentListService.nodes;
     }
 
     ngOnInit() {}
@@ -51,10 +52,10 @@ export class AddEquipmentComponent implements OnInit {
 
     // Select a single equipment
     selectSingleEquipment(equipmentKey: number) {
-      const index = this.arrayOfCreatedEquipmentKeys.findIndex(equipment => {
+      const index = this.equipmentListService.arrayOfCreatedEquipmentKeys.findIndex(equipment => {
         return equipment.key === equipmentKey;
       });
-      this.selectedNode = this.arrayOfCreatedEquipmentKeys[index];
+      this.selectedNode = this.equipmentListService.arrayOfCreatedEquipmentKeys[index];
     }
 
     // Control the single equipment option modal starts
@@ -78,24 +79,28 @@ export class AddEquipmentComponent implements OnInit {
     }
     // Control the single equipment option modal ends
 
-  showAddEquipmentModal() {
+  showAddEquipmentModal(parent = false) {
     this.show = true;
+    if (parent) {
+      this.selectedNode = undefined;
+    }
     this.hideNodeOptionsModal();
   }
 
   // Delete a single equipment
   deleteEquipment() {
-    const index = this.arrayOfCreatedEquipmentKeys.findIndex(equipment => {
+    const index = this.equipmentListService.arrayOfCreatedEquipmentKeys.findIndex(equipment => {
       return equipment.key === this.selectedNodeId;
     });
 
     // const parentId = this.
-    const oldItemContainer = this.containerToDeleteFromId !== '' ? this.nodeLookup[this.containerToDeleteFromId].children : this.nodes;
+    // tslint:disable-next-line: max-line-length
+    const oldItemContainer = this.containerToDeleteFromId !== '' ? this.nodeLookup[this.containerToDeleteFromId].children : this.equipmentListService.nodes;
 
     const i = oldItemContainer.findIndex(c => c.key === this.selectedNodeId);
     oldItemContainer.splice(i, 1);
 
-    this.arrayOfCreatedEquipmentKeys.splice(index, 1);
+    this.equipmentListService.arrayOfCreatedEquipmentKeys.splice(index, 1);
     delete this.selectedNode;
 
     this.hideNodeOptionsModal();
@@ -109,7 +114,7 @@ export class AddEquipmentComponent implements OnInit {
     if (this.selectedNode) {
       equipmentId = `${ this.selectedNode.id }.${this.selectedNode.children.length + 1}`;
     } else {
-      equipmentId = `${this.nodes.length + 1}`;
+      equipmentId = `${this.equipmentListService.nodes.length + 1}`;
     }
 
     const equipmentKey = Math.random() * 400;
@@ -117,11 +122,11 @@ export class AddEquipmentComponent implements OnInit {
     const newEquipment = new singleEquipmentNode(equipmentKey, equipmentId, equipmentRegulatoryName);
 
     const newEquipmentReference = newEquipment;
-    this.arrayOfCreatedEquipmentKeys.push(newEquipmentReference);
+    this.equipmentListService.arrayOfCreatedEquipmentKeys.push(newEquipmentReference);
 
-    this.selectedNode ? this.selectedNode?.children.push(newEquipment) : this.nodes.push(newEquipment);
+    this.selectedNode ? this.selectedNode?.children.push(newEquipment) : this.equipmentListService.nodes.push(newEquipment);
 
-    this.prepareDragDrop(this.nodes);
+    this.prepareDragDrop(this.equipmentListService.nodes);
   }
 
   // Duplicate equipment
@@ -129,7 +134,7 @@ export class AddEquipmentComponent implements OnInit {
     const duplicateEquipment = JSON.parse(JSON.stringify(this.selectedNode));
     const duplicateEquipmentKey = Math.random() * 400;
     duplicateEquipment.key = duplicateEquipmentKey;
-    this.arrayOfCreatedEquipmentKeys.push(duplicateEquipmentKey);
+    this.equipmentListService.arrayOfCreatedEquipmentKeys.push(duplicateEquipmentKey);
 
     let duplicateEquipmentChildrenArray = duplicateEquipment.children;
 
@@ -137,7 +142,7 @@ export class AddEquipmentComponent implements OnInit {
       array.forEach((element) => {
         const duplicateEquipmentChildKey = Math.random() * 400;
         element.key = duplicateEquipmentChildKey;
-        this.arrayOfCreatedEquipmentKeys.push(duplicateEquipmentChildKey);
+        this.equipmentListService.arrayOfCreatedEquipmentKeys.push(duplicateEquipmentChildKey);
 
         if (element.children.length > 0) {
           duplicateEquipmentChildrenArray = element.children;
@@ -147,7 +152,7 @@ export class AddEquipmentComponent implements OnInit {
       });
     };
 
-    const oldItemContainer = this.containerToDeleteFromId !== '' ? this.nodeLookup[this.containerToDeleteFromId].children : this.nodes;
+    const oldItemContainer = this.containerToDeleteFromId !== '' ? this.nodeLookup[this.containerToDeleteFromId].children : this.equipmentListService.nodes;
 
     oldItemContainer.push(duplicateEquipment);
   }
@@ -207,12 +212,12 @@ export class AddEquipmentComponent implements OnInit {
 
         const draggedItemId = event.item.data;
         const parentItemId = event.previousContainer.id;
-        const targetListId = this.getParentNodeId(this.dropActionTodo.targetId, this.nodes, 'main');
+        const targetListId = this.getParentNodeId(this.dropActionTodo.targetId, this.equipmentListService.nodes, 'main');
 
         const draggedItem = this.nodeLookup[draggedItemId];
 
-        const oldItemContainer = parentItemId !== 'main' ? this.nodeLookup[parentItemId].children : this.nodes;
-        const newContainer = targetListId !== 'main' ? this.nodeLookup[targetListId].children : this.nodes;
+        const oldItemContainer = parentItemId !== 'main' ? this.nodeLookup[parentItemId].children : this.equipmentListService.nodes;
+        const newContainer = targetListId !== 'main' ? this.nodeLookup[targetListId].children : this.equipmentListService.nodes;
 
 
         const i = oldItemContainer.findIndex(c => c.id === draggedItemId);
@@ -239,7 +244,7 @@ export class AddEquipmentComponent implements OnInit {
           draggedItem.id = `${this.nodeLookup[this.dropActionTodo.targetId].id}.${this.nodeLookup[this.dropActionTodo.targetId].children.length}`;
         }
 
-        this.prepareDragDrop(this.nodes);
+        this.prepareDragDrop(this.equipmentListService.nodes);
         this.clearDragInfo(true);
     }
     getParentNodeId(id: string, nodesToSearch, parentId: string): string {

@@ -1,0 +1,168 @@
+<div class="main">
+    <div class='ui grid container' style="justify-content: flex-end;">
+        <app-blue-button [btnType]='["primary", "ui", "button"]' (click)='show = true'>Add Specification Standard Profile</app-blue-button>
+    </div>
+    <div class="container grid stackable top ui"></div>
+    <div class="bottom">
+
+        <div class="form grid ui container stackable" style="justify-content: space-between; margin-top: 7px;">
+            <div class="equipment-tip">
+                <img src="assets/icons/wb-incandescent.svg" alt="" /> Select an equipment below and enter its details in the panel on the right
+            </div>
+            <div class="node-container column ten wide" style='height: 100%;'>
+                <div style='height: 60%; overflow-y: scroll; border-bottom: 2px solid #d4d2d2;' *ngIf='listOfSpecificationStandards.length > 0'>
+                    <div *ngFor="let document of listOfSpecificationStandards" [ngClass]='{active: highlightedDocument === document}' (click)="selectSpecificationStandard(document); highlightedDocument = document" class="container document-container" style="margin-top: 20px; align-items: center; justify-content: space-between; display: flex;">
+                        <div class='document-name'>{{ document.specificationTitle }}
+                        </div>
+                        <i class="ellipsis vertical icon"></i>
+                    </div>
+                </div>
+
+                <div class="equipmentDocumentList" *ngIf='equipmentDocuments' style='overflow-y: scroll; height: 40%;'>
+                    <div class='heading'>Documents that apply to
+                        <span class="equipmentName">{{this.nameOfSelectedEquipment}}</span>
+                    </div>
+                    <div *ngFor='let document of equipmentDocuments' class='document'>{{document.specificationTitle}}</div>
+                </div>
+
+                <div *ngIf='listOfSpecificationStandards.length === 0' class='no-file'>
+                    <div>You have not added any specification standard profile</div>
+                    <img src="assets/icons/file-icon.svg" alt="">
+                </div>
+            </div>
+            <div class="form-container column four wide">
+                <div style='font-size: 12px;'>List of equipment for Type Approval Application </div>
+                <form>
+                    <ng-template #tmplNode let-node="node" let-nodId='node.id'>
+                        <div class="node-item" [attr.data-id]="node.id" [attr.id]="'node-' + node.id">
+                            <div class="node-title single-equipment-box" (click)='displayEquipmentDocuments(node); highlightedEquipment = node' [ngClass]='{active: highlightedEquipment === node}'>
+                                <div class="ui checkbox">
+                                    <input ngModel type="checkbox" name="{{node.details.equipmentRegulatoryName}}" id="{{node.details.equipmentRegulatoryName}}" (change)="handleDocument(node.key)" (click)='$event.stopPropagation()' ngModel [checked]="node.listOfSpecificationStandards.includes(selectedSpecificationStandard)"
+                                        [disabled]='!this.selectedSpecificationStandard' />
+                                    <label for="{{node.details.equipmentRegulatoryName}}" (click)='$event.stopPropagation()'>
+
+                  &nbsp;&nbsp;&nbsp; {{ node.details.equipmentRegulatoryName }} </label>
+                                </div>
+                            </div>
+
+                            <div class="node-children" [id]="node.id">
+                                <div *ngFor="let child of node.children">
+                                    <ng-container *ngTemplateOutlet="tmplNode; context: { node: child }"></ng-container>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+
+                    <div [id]="'main'" style="margin-top: 0;">
+                        <div style="padding-top: 10px;" *ngFor="let node of this.equipmentListService.nodes">
+                            <ng-container *ngTemplateOutlet="tmplNode; context: { node: node }"></ng-container>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="ui grid stackable container" style="margin-top: 96px;">
+            <div class="row" style="justify-content: flex-end;">
+                <app-blue-button [btnType]="['ui', 'primary', 'massive', 'button', 'basic']">Save &amp; Continue Later</app-blue-button>
+                <app-blue-button [btnType]="['ui', 'primary', 'massive', 'button']">Next</app-blue-button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<sui-modal [isClosable]="true" [size]="'massive'" (dismissed)="show = false" *ngIf="show" #modal>
+    <div class="header">New Specification Standard Profile</div>
+    <div class="content">
+        <form (ngSubmit)="createNewEquipmentStandard(form); show = false" #form="ngForm" class='ui form'>
+            <div>
+                <label for="specification-standard-profile-name">Specification Standard Profile Name/Title</label>
+                <input ngModel type="text" id="specification-standard-profile-name" placeholder="Specification Standard for ODU RF Equipment" ngModel name='specificationTitle'>
+            </div>
+            <div>
+                <h3>Safety</h3>
+                <div class="ui grid stackable inline fields">
+                    <div class="field column fourteen wide">EN 50360 / CENELEC 50360 - Product standard to demonstrate the compliance of mobile phones with the basic restrictions related to human exposure to electromagnetic fields (300 MHz — 3GHz):</div>
+                    <div class="field">
+                        <div class="ui radio checkbox">
+                            <input ngModel type="radio" name="EN50360CENELEC50360" value="yes">
+                            <label>Yes</label>
+                        </div>
+                        <div class="ui radio checkbox">
+                            <input ngModel type="radio" name="EN50360CENELEC50360" value="no">
+                            <label>No</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui divider"></div>
+                <div class="ui grid stackable inline fields">
+                    <div class='field column fourteen wide'>EN 50361 / CENELEC 50361 - Basic standard for the measurement of specific absorption rate related to human exposure to electromagnetic fields from mobile phones (300 MHz — 3GHz):</div>
+                    <div class="field">
+                        <div class="ui radio checkbox">
+                            <input ngModel type="radio" name="EN50361CENELEC50361" value="yes">
+                            <label>Yes</label>
+                        </div>
+                        <div class="ui radio checkbox">
+                            <input ngModel type="radio" name="EN50361CENELEC50361" value="no">
+                            <label>No</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui divider"></div>
+                <div class="ui grid stackable inline fields">
+                    <div class='field column fourteen wide'>EN 50364 / CENELEC 50364 - Limitation of human exposure to electromagnetic fields from devices operating in the frequency range 0 Hz to 10 GHz used in Electronic Article Surveillance (EAS) Radio Frequency Identification (RFID) and
+                        similar applications.</div>
+                    <div class="field">
+                        <div class="ui radio checkbox">
+                            <input ngModel type="radio" name="EN50364CENELEC50364" value="yes">
+                            <label>Yes</label>
+                        </div>
+                        <div class="ui radio checkbox">
+                            <input ngModel type="radio" name="EN50364CENELEC50364" value="no">
+                            <label>No</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui divider"></div>
+                <div class="ui grid stackable inline fields">
+                    <div class='field column fourteen wide'>EN 50371 / CENELEC 50371 - Generic standard to demonstrate the compliance of low power electronic and electrical apparatus with the basic restrictions related to human exposure to electromagnetic fields (10 MHz — 300GHz).:</div>
+                    <div class="field">
+                        <div class="ui radio checkbox">
+                            <input ngModel type="radio" name="EN50371CENELEC50371" value="yes">
+                            <label>Yes</label>
+                        </div>
+                        <div class="ui radio checkbox">
+                            <input ngModel type="radio" name="EN50371CENELEC50371" value="no">
+                            <label>No</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui divider"></div>
+            </div>
+            <div>
+                <h3>Electromagnetic Compatibility</h3>
+                <div class="ui grid stackable inline fields">
+                    <div class='field column fourteen wide'>EN 55011 / CISPR 11 - Industrial scientific and medical (ISM) radio-frequency equipment – Electromagnetic disturbance characteristics – Limits and methods of measurement:</div>
+                    <div class="field">
+                        <div class="ui radio checkbox">
+                            <input ngModel type="radio" name="EN55011CISPR11" value="yes">
+                            <label>Yes</label>
+                        </div>
+                        <div class="ui radio checkbox">
+                            <input ngModel type="radio" name="EN55011CISPR11" value="no">
+                            <label>No</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui divider"></div>
+            </div>
+            <div class='ui grid container' style="justify-content: flex-end; margin-bottom: 20px;">
+                <app-blue-button [btnType]='["button", "primary", "basic", "ui"]'>Done</app-blue-button>
+            </div>
+        </form>
+    </div>
+    <!-- <div class="actions">
+            <button class="ui red button" (click)="modal.deny()">Cancel</button>
+            <button class="ui green button" (click)="modal.approve('done')">OK</button>
+        </div> -->
+</sui-modal>

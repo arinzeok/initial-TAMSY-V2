@@ -24,6 +24,11 @@ const routes: Routes = [
     {
       path: 'home/type-approval-application',
       loadChildren: () => import('./type-approval-application.module').then(m => m.TypeApprovalApplicationModule)
+    },
+    {
+      path: '',
+      redirectTo: 'home',
+      pathMatch: 'full'
     }
     ]
   }

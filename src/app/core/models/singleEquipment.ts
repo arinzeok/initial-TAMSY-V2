@@ -11,6 +11,8 @@ export class singleEquipmentNode {
     addressOfTheManufacturer: ''
   };
   children: Array<singleEquipmentNode> = [];
+  listOfDocuments = [];
+  listOfSpecificationStandards = [];
 
   constructor(key: number, id: string, equipmentRegulatoryName: string) {
     this.key = key;
