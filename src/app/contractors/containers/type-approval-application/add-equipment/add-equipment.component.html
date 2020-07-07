@@ -132,7 +132,7 @@
           [btnType]="['ui', 'primary', 'massive', 'button', 'basic']"
           >Save &amp; Continue Later</app-blue-button
         >
-        <app-blue-button [btnType]="['ui', 'primary', 'massive', 'button']"
+        <app-blue-button [btnType]="['ui', 'primary', 'massive', 'button']" routerLink='/contractor/home/type-approval-application/upload-equipment-document'
           >Next</app-blue-button
         >
       </div>
@@ -159,10 +159,6 @@
                     </div>
                 </form>
             </div>
-            <!-- <div class="actions">
-            <button class="ui red button" (click)="modal.deny()">Cancel</button>
-            <button class="ui green button" (click)="modal.approve('done')">OK</button>
-        </div> -->
             </sui-modal>
             <sui-modal [isClosable]="true" [size]="'mini'" (dismissed)="hideNodeOptionsModal()" *ngIf="showNodeOptions" #modal>
                 <div class="content">
@@ -172,8 +168,4 @@
                     <div (click)="duplicateEquipment()" class="node-option">DUPLICATE</div>
                     <div (click)="deleteEquipment()" class="node-option">DELETE</div>
                 </div>
-                <!-- <div class="actions">
-            <button class="ui red button" (click)="modal.deny()">Cancel</button>
-            <button class="ui green button" (click)="modal.approve('done')">OK</button>
-        </div> -->
             </sui-modal>

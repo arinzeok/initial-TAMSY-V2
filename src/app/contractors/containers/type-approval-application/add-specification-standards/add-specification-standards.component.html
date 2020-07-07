@@ -6,59 +6,63 @@
     <div class="bottom">
 
         <div class="form grid ui container stackable" style="justify-content: space-between; margin-top: 7px;">
-            <div class="equipment-tip">
-                <img src="assets/icons/wb-incandescent.svg" alt="" /> Select an equipment below and enter its details in the panel on the right
-            </div>
-            <div class="node-container column ten wide" style='height: 100%;'>
-                <div style='height: 60%; overflow-y: scroll; border-bottom: 2px solid #d4d2d2;' *ngIf='listOfSpecificationStandards.length > 0'>
-                    <div *ngFor="let document of listOfSpecificationStandards" [ngClass]='{active: highlightedDocument === document}' (click)="selectSpecificationStandard(document); highlightedDocument = document" class="container document-container" style="margin-top: 20px; align-items: center; justify-content: space-between; display: flex;">
-                        <div class='document-name'>{{ document.specificationTitle }}
+            <div class='column ten wide' style="margin-top: 0px">
+                <div class="equipment-tip">
+                    <img src="assets/icons/wb-incandescent.svg" alt="" /> Select an equipment below and enter its details in the panel on the right
+                </div>
+                <div class="node-container" style='height: 100%;'>
+                    <div style='height: 60%; overflow-y: scroll; border-bottom: 2px solid #d4d2d2;' *ngIf='listOfSpecificationStandards.length > 0'>
+                        <div *ngFor="let document of listOfSpecificationStandards" [ngClass]='{active: highlightedDocument === document}' (click)="selectSpecificationStandard(document); highlightedDocument = document" class="container document-container" style="margin-top: 20px; align-items: center; justify-content: space-between; display: flex;">
+                            <div class='document-name'>{{ document.specificationTitle }}
+                            </div>
+                            <i class="ellipsis vertical icon" (click)='showNodeOptionsModal()'></i>
                         </div>
-                        <i class="ellipsis vertical icon"></i>
                     </div>
-                </div>
 
-                <div class="equipmentDocumentList" *ngIf='equipmentDocuments' style='overflow-y: scroll; height: 40%;'>
-                    <div class='heading'>Documents that apply to
-                        <span class="equipmentName">{{this.nameOfSelectedEquipment}}</span>
+                    <div class="equipmentDocumentList" *ngIf='equipmentDocuments && listOfSpecificationStandards.length !== 0' style='overflow-y: scroll; height: 40%;'>
+                        <div class='heading'>Documents that apply to
+                            <span class="equipmentName">{{this.nameOfSelectedEquipment}}</span>
+                        </div>
+                        <div *ngFor='let document of equipmentDocuments' class='document'>{{document.specificationTitle}}</div>
                     </div>
-                    <div *ngFor='let document of equipmentDocuments' class='document'>{{document.specificationTitle}}</div>
-                </div>
 
-                <div *ngIf='listOfSpecificationStandards.length === 0' class='no-file'>
-                    <div>You have not added any specification standard profile</div>
-                    <img src="assets/icons/file-icon.svg" alt="">
+                    <div *ngIf='listOfSpecificationStandards.length === 0' class='no-file'>
+                        <div>You have not added any specification standard profile</div>
+                        <img src="assets/icons/file-icon.svg" alt="">
+                    </div>
                 </div>
             </div>
-            <div class="form-container column four wide">
+            <div style="margin-top: 0px" class=" column four wide">
                 <div style='font-size: 12px;'>List of equipment for Type Approval Application </div>
-                <form>
-                    <ng-template #tmplNode let-node="node" let-nodId='node.id'>
-                        <div class="node-item" [attr.data-id]="node.id" [attr.id]="'node-' + node.id">
-                            <div class="node-title single-equipment-box" (click)='displayEquipmentDocuments(node); highlightedEquipment = node' [ngClass]='{active: highlightedEquipment === node}'>
-                                <div class="ui checkbox">
-                                    <input ngModel type="checkbox" name="{{node.details.equipmentRegulatoryName}}" id="{{node.details.equipmentRegulatoryName}}" (change)="handleDocument(node.key)" (click)='$event.stopPropagation()' ngModel [checked]="node.listOfSpecificationStandards.includes(selectedSpecificationStandard)"
-                                        [disabled]='!this.selectedSpecificationStandard' />
-                                    <label for="{{node.details.equipmentRegulatoryName}}" (click)='$event.stopPropagation()'>
+                <div class="form-container">
+                    <form>
+                        <ng-template #tmplNode let-node="node" let-nodId='node.id'>
+                            <div class="node-item" [attr.data-id]="node.id" [attr.id]="'node-' + node.id">
+                                <div class="node-title single-equipment-box" (click)='displayEquipmentDocuments(node); !this.selectedSpecificationStandard || listOfSpecificationStandards.length !== 0 ? highlightedEquipment = node : null' [ngClass]='{active: highlightedEquipment === node && listOfSpecificationStandards.length !== 0}'>
+                                    <div class="ui checkbox">
+                                        <input ngModel type="checkbox" name="{{node.details.equipmentRegulatoryName}}" id="{{node.details.equipmentRegulatoryName}}" (change)="handleDocument(node.key)" (click)='$event.stopPropagation()' ngModel [checked]="node.listOfSpecificationStandards.includes(selectedSpecificationStandard)"
+                                            [disabled]='!this.selectedSpecificationStandard || listOfSpecificationStandards.length === 0' />
+                                        <label for="{{node.details.equipmentRegulatoryName}}" (click)='$event.stopPropagation()'>
 
                   &nbsp;&nbsp;&nbsp; {{ node.details.equipmentRegulatoryName }} </label>
+                                    </div>
+                                </div>
+
+                                <div class="node-children" [id]="node.id">
+                                    <div *ngFor="let child of node.children">
+                                        <ng-container *ngTemplateOutlet="tmplNode; context: { node: child }"></ng-container>
+                                    </div>
                                 </div>
                             </div>
+                        </ng-template>
 
-                            <div class="node-children" [id]="node.id">
-                                <div *ngFor="let child of node.children">
-                                    <ng-container *ngTemplateOutlet="tmplNode; context: { node: child }"></ng-container>
-                                </div>
+                        <div [id]="'main'" style="margin-top: 0;margin-bottom: 0;">
+                            <div style="padding-top: 10px;" *ngFor="let node of this.equipmentListService.nodes">
+                                <ng-container *ngTemplateOutlet="tmplNode; context: { node: node }"></ng-container>
                             </div>
                         </div>
-                    </ng-template>
-
-                    <div [id]="'main'" style="margin-top: 0;">
-                        <div style="padding-top: 10px;" *ngFor="let node of this.equipmentListService.nodes">
-                            <ng-container *ngTemplateOutlet="tmplNode; context: { node: node }"></ng-container>
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
 
@@ -165,4 +169,28 @@
             <button class="ui red button" (click)="modal.deny()">Cancel</button>
             <button class="ui green button" (click)="modal.approve('done')">OK</button>
         </div> -->
+</sui-modal>
+
+<sui-modal [isClosable]="true" [size]="'mini'" (dismissed)="hideNodeOptionsModal()" *ngIf="showNodeOptions" #modal>
+    <div class="content">
+        <div (click)="renameDocumentModal = true; hideNodeOptionsModal();" class="node-option">
+            RENAME
+        </div>
+        <div (click)="deleteDocument()" class="node-option">DELETE</div>
+    </div>
+</sui-modal>
+
+<sui-modal [isClosable]="true" [size]="'mini'" (dismissed)="renameDocumentModal = false" *ngIf="renameDocumentModal" #modal>
+    <div class="header">Rename Document</div>
+    <div class="content">
+        <form (ngSubmit)="renameDocument(form); renameDocumentModal = false" #form="ngForm">
+            <div>
+                <label for="new-equipment-label">Equipment Regulatory Name</label>
+                <input type="text" name="newSpecificationTitle" ngModel />
+            </div>
+            <div class="button-container">
+                <app-blue-button [btnType]="['basic', 'primary', 'ui', 'button']">Done</app-blue-button>
+            </div>
+        </form>
+    </div>
 </sui-modal>

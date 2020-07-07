@@ -20,11 +20,11 @@
                             <div class='document-name'>
                                 <img src="assets/icons/{{document.name.split('.')[1]}}-icon.svg" alt=""> {{ document.name.split('.')[0] }}
                             </div>
-                            <i class="ellipsis vertical icon"></i>
+                            <i class="ellipsis vertical icon" (click)='showNodeOptionsModal()'></i>
                         </div>
                     </div>
 
-                    <div class="equipmentDocumentList" *ngIf='equipmentDocuments' style='overflow-y: scroll; height: 40%;'>
+                    <div class="equipmentDocumentList" *ngIf='equipmentDocuments && listOfDocuments.length !== 0' style='overflow-y: scroll; height: 40%;'>
                         <div class='heading'>Documents that apply to
                             <span class="equipmentName">{{this.nameOfSelectedEquipment}}</span>
                         </div>
@@ -44,10 +44,10 @@
                     <form>
                         <ng-template #tmplNode let-node="node">
                             <div class="node-item" [attr.data-id]="node.id" [attr.id]="'node-' + node.id">
-                                <div class="node-title single-equipment-box" (click)='displayEquipmentDocuments(node); highlightedEquipment = node' [ngClass]='{active: highlightedEquipment === node}'>
+                                <div class="node-title single-equipment-box" (click)='displayEquipmentDocuments(node); !this.selectedDocument || listOfDocuments.length !== 0 ? highlightedEquipment = node : null' [ngClass]='{active: highlightedEquipment === node && listOfDocuments.length !== 0}'>
                                     <div class="ui checkbox">
                                         <input type="checkbox" name="{{node.details.equipmentRegulatoryName}}" id="{{node.details.equipmentRegulatoryName}}" (change)="handleDocument(node.key)" (click)='$event.stopPropagation()' ngModel [checked]="node.listOfDocuments.includes(selectedDocument)"
-                                            [disabled]='!this.selectedDocument' />
+                                            [disabled]='!this.selectedDocument || listOfDocuments.length === 0' />
                                         <label for="{{node.details.equipmentRegulatoryName}}" (click)='$event.stopPropagation()'>
 
                     &nbsp;&nbsp;&nbsp; {{ node.details.equipmentRegulatoryName }} </label>
@@ -75,8 +75,32 @@
         <div class="ui grid stackable container" style="margin-top: 96px;">
             <div class="row" style="justify-content: flex-end;">
                 <app-blue-button [btnType]="['ui', 'primary', 'massive', 'button', 'basic']">Save &amp; Continue Later</app-blue-button>
-                <app-blue-button [btnType]="['ui', 'primary', 'massive', 'button']">Next</app-blue-button>
+                <app-blue-button [btnType]="['ui', 'primary', 'massive', 'button']" routerLink='/contractor/home/type-approval-application/add-specification-standards'>Next</app-blue-button>
             </div>
         </div>
     </div>
 </div>
+
+<sui-modal [isClosable]="true" [size]="'mini'" (dismissed)="hideNodeOptionsModal()" *ngIf="showNodeOptions" #modal>
+    <div class="content">
+        <div (click)="renameDocumentModal = true; hideNodeOptionsModal();" class="node-option">
+            RENAME
+        </div>
+        <div (click)="deleteDocument()" class="node-option">DELETE</div>
+    </div>
+</sui-modal>
+
+<sui-modal [isClosable]="true" [size]="'mini'" (dismissed)="renameDocumentModal = false" *ngIf="renameDocumentModal" #modal>
+    <div class="header">Rename Document</div>
+    <div class="content">
+        <form (ngSubmit)="renameDocument(form); renameDocumentModal = false" #form="ngForm">
+            <div>
+                <label for="new-equipment-label">Equipment Regulatory Name</label>
+                <input type="text" name="newDocumentName" ngModel />
+            </div>
+            <div class="button-container">
+                <app-blue-button [btnType]="['basic', 'primary', 'ui', 'button']">Done</app-blue-button>
+            </div>
+        </form>
+    </div>
+</sui-modal>

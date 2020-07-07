@@ -18,6 +18,8 @@ export class AddSpecificationStandardsComponent implements OnInit, OnDestroy {
   nameOfSelectedEquipmentSubscription: Subscription;
   highlightedDocument;
   highlightedEquipment;
+  showNodeOptions;
+  renameDocumentModal;
 
   constructor(public equipmentListService: EquipmentListService) { }
 
@@ -25,6 +27,18 @@ export class AddSpecificationStandardsComponent implements OnInit, OnDestroy {
     this.nameOfSelectedEquipmentSubscription = this.equipmentListService.nameOfSelectedEquipmentToViewDocument.subscribe((res: string) => {
       this.nameOfSelectedEquipment = res;
     });
+  }
+
+  hideNodeOptionsModal() {
+    if (this.showNodeOptions) {
+      this.showNodeOptions = !this.showNodeOptions;
+    }
+  }
+
+  showNodeOptionsModal() {
+    if (!this.showNodeOptions) {
+      this.showNodeOptions = !this.showNodeOptions;
+    }
   }
 
   createNewEquipmentStandard(form) {
@@ -67,6 +81,49 @@ export class AddSpecificationStandardsComponent implements OnInit, OnDestroy {
   displayEquipmentDocuments(node: singleEquipmentNode) {
     this.equipmentListService.setNameOfSelectedEquipmentToViewDocument(node.details.equipmentRegulatoryName);
     this.equipmentDocuments = node.listOfSpecificationStandards;
+  }
+
+  deleteDocument() {
+    const index = this.equipmentListService.arrayOfCreatedEquipmentKeys.findIndex(equipment => {
+      return equipment.key === this.selectedSpecificationStandard;
+    });
+
+    const documentIndex = this.listOfSpecificationStandards.findIndex((document) => {
+      return document.id === this.selectedSpecificationStandard.id;
+    });
+
+    this.listOfSpecificationStandards.splice(documentIndex, 1);
+
+    this.equipmentListService.arrayOfCreatedEquipmentKeys.forEach((element) => {
+      const elementDocumentIndex = element.listOfSpecificationStandards.findIndex((document) => {
+        return document.id === this.selectedSpecificationStandard.id;
+      });
+
+      if (elementDocumentIndex !== -1) {
+        element.listOfSpecificationStandards.splice(elementDocumentIndex, 1);
+      }
+    });
+
+    this.hideNodeOptionsModal();
+
+  }
+
+  renameDocument(form) {
+    const index = this.listOfSpecificationStandards.findIndex(document => {
+      return document.id === this.selectedSpecificationStandard.id;
+    });
+
+    const newEditedDocument = this.listOfSpecificationStandards[index];
+    const selectedDocumentSplitName = this.listOfSpecificationStandards[index].specificationTitle.split('.');
+    const oldName = this.listOfSpecificationStandards[index].specificationTitle;
+    selectedDocumentSplitName[0] = form.value.newSpecificationTitle;
+    newEditedDocument.specificationTitle = selectedDocumentSplitName.join('.');
+
+    this.equipmentListService.arrayOfCreatedEquipmentKeys.forEach((element) => {
+      if (element.specificationTitle === oldName) {
+        element.specificationTitle = selectedDocumentSplitName.join('.');
+      }
+    });
   }
 
   /* verifyDocument() {

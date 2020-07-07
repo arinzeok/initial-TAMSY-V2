@@ -183,6 +183,7 @@ form {
 
 .node-option {
     margin-bottom: 20px;
+    cursor: pointer;
 }
 
 .placeholder {
@@ -216,7 +217,9 @@ form {
     }
     i {
         color: #000;
+        display: flex;
         font-size: 30px;
+        align-items: center;
     }
 }
 
