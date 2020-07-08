@@ -100,7 +100,7 @@
                         <div class="ui relaxed divided list">
                             <div class="item" *ngFor="let document of item.listOfDocuments">
                                 <div class="ui grid">
-                                    <div class="column twelve wide">{{ document.name }}</div>
+                                    <div class="column twelve wide">{{ document.file.name }}</div>
                                     <div class="column four wide">
                                         <app-blue-button [btnType]="['basic', 'primary', 'ui', 'button', 'small']" (click)='readFile(document)'>View</app-blue-button>
                                     </div>
@@ -144,9 +144,19 @@
         <div>
             <h2>Are you sure you want to submit your Type Approval Application?</h2>
         </div>
-        <div class="node-option ui grid stackable container" style='justify-content: space-around; margin-top: 30px;'>
-            <app-blue-button [btnType]='["ui", "primary", "huge", "button", "basic"]'>No</app-blue-button>
-            <app-blue-button [btnType]='["ui", "primary", "huge", "button"]' (click)='modal.deny(); submit()'>Yes</app-blue-button>
+    </div>
+    <div class="node-option ui grid stackable container actions" style='justify-content: space-around; margin-top: 30px;'>
+        <app-blue-button [btnType]='["ui", "primary", "huge", "button", "basic"]' (click)='showSubmissionModal = false;'>No</app-blue-button>
+        <app-blue-button [btnType]='["ui", "primary", "huge", "button"]' (click)='showSubmissionModal = false; submit()'>Yes</app-blue-button>
+    </div>
+</sui-modal>
+
+
+<sui-modal [isClosable]="true" [size]="'small'" (dismissed)="hidePreviewModal()" *ngIf="previewModal" #modal>
+    <div class="header">Document Preview</div>
+    <div class="content">
+        <div #page>
+
         </div>
     </div>
 </sui-modal>

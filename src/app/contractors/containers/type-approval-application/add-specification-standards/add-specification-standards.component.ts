@@ -11,7 +11,6 @@ import { SpecificationStandard } from 'src/app/core/models/specificationStandard
 })
 export class AddSpecificationStandardsComponent implements OnInit, OnDestroy {
   show: boolean;
-  listOfSpecificationStandards = [];
   selectedSpecificationStandard;
   equipmentDocuments: any[];
   nameOfSelectedEquipment: string;
@@ -53,7 +52,7 @@ export class AddSpecificationStandardsComponent implements OnInit, OnDestroy {
       EN55011CISPR11: form.value.EN55011CISPR11
     };
 
-    this.listOfSpecificationStandards.unshift(specificationStandard);
+    this.equipmentListService.listOfSpecificationStandards.unshift(specificationStandard);
     console.log(specificationStandard);
   }
 
@@ -88,11 +87,11 @@ export class AddSpecificationStandardsComponent implements OnInit, OnDestroy {
       return equipment.key === this.selectedSpecificationStandard;
     });
 
-    const documentIndex = this.listOfSpecificationStandards.findIndex((document) => {
+    const documentIndex = this.equipmentListService.listOfSpecificationStandards.findIndex((document) => {
       return document.id === this.selectedSpecificationStandard.id;
     });
 
-    this.listOfSpecificationStandards.splice(documentIndex, 1);
+    this.equipmentListService.listOfSpecificationStandards.splice(documentIndex, 1);
 
     this.equipmentListService.arrayOfCreatedEquipmentKeys.forEach((element) => {
       const elementDocumentIndex = element.listOfSpecificationStandards.findIndex((document) => {
@@ -109,13 +108,13 @@ export class AddSpecificationStandardsComponent implements OnInit, OnDestroy {
   }
 
   renameDocument(form) {
-    const index = this.listOfSpecificationStandards.findIndex(document => {
+    const index = this.equipmentListService.listOfSpecificationStandards.findIndex(document => {
       return document.id === this.selectedSpecificationStandard.id;
     });
 
-    const newEditedDocument = this.listOfSpecificationStandards[index];
-    const selectedDocumentSplitName = this.listOfSpecificationStandards[index].specificationTitle.split('.');
-    const oldName = this.listOfSpecificationStandards[index].specificationTitle;
+    const newEditedDocument = this.equipmentListService.listOfSpecificationStandards[index];
+    const selectedDocumentSplitName = this.equipmentListService.listOfSpecificationStandards[index].specificationTitle.split('.');
+    const oldName = this.equipmentListService.listOfSpecificationStandards[index].specificationTitle;
     selectedDocumentSplitName[0] = form.value.newSpecificationTitle;
     newEditedDocument.specificationTitle = selectedDocumentSplitName.join('.');
 

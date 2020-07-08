@@ -8,6 +8,10 @@ export class EquipmentListService {
 
   arrayOfCreatedEquipmentKeys = [];
 
+  listOfDocuments = [];
+
+  listOfSpecificationStandards = [];
+
   nodes = [];
 
   nameOfSelectedEquipmentToViewDocument = new Subject();

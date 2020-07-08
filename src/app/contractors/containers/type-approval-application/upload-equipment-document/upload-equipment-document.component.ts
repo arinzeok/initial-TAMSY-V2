@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
 })
 export class UploadEquipmentDocumentComponent implements OnInit, OnDestroy {
 
-  listOfDocuments = [];
+
   selectedDocument;
   equipmentDocuments: any[];
   nameOfSelectedEquipment: string;
@@ -44,11 +44,11 @@ export class UploadEquipmentDocumentComponent implements OnInit, OnDestroy {
         return equipment.key === this.selectedDocument;
       });
 
-      const documentIndex = this.listOfDocuments.findIndex((document) => {
+      const documentIndex = this.equipmentListService.listOfDocuments.findIndex((document) => {
         return document.id === this.selectedDocument.id;
       });
 
-      this.listOfDocuments.splice(documentIndex, 1);
+      this.equipmentListService.listOfDocuments.splice(documentIndex, 1);
 
       this.equipmentListService.arrayOfCreatedEquipmentKeys.forEach((element) => {
         const elementDocumentIndex = element.listOfDocuments.findIndex((document) => {
@@ -65,19 +65,19 @@ export class UploadEquipmentDocumentComponent implements OnInit, OnDestroy {
     }
 
     renameDocument(form) {
-      const index = this.listOfDocuments.findIndex(document => {
+      const index = this.equipmentListService.listOfDocuments.findIndex(document => {
         return document.id === this.selectedDocument.id;
       });
 
-      const newEditedDocument = this.listOfDocuments[index];
-      const selectedDocumentSplitName = this.listOfDocuments[index].name.split('.');
-      const oldName = this.listOfDocuments[index].name;
+      const newEditedDocument = this.equipmentListService.listOfDocuments[index];
+      const selectedDocumentSplitName = this.equipmentListService.listOfDocuments[index].name.split('.');
+      const oldName = this.equipmentListService.listOfDocuments[index].file.name;
       selectedDocumentSplitName[0] = form.value.newDocumentName;
-      newEditedDocument.name = selectedDocumentSplitName.join('.');
+      newEditedDocument.file.name = selectedDocumentSplitName.join('.');
 
       this.equipmentListService.arrayOfCreatedEquipmentKeys.forEach((element) => {
-        if (element.name === oldName) {
-          element.name = selectedDocumentSplitName.join('.');
+        if (element.file.name === oldName) {
+          element.file.name = selectedDocumentSplitName.join('.');
         }
       });
     }
@@ -87,6 +87,9 @@ export class UploadEquipmentDocumentComponent implements OnInit, OnDestroy {
     console.log(arrayOfObjects);
     arrayOfObjects.forEach((element) => {
       const file = {
+        file: element
+      };
+      const files = {
         // tslint:disable-next-line: no-string-literal
         lastModified: element['lastModified'],
 // tslint:disable-next-line: no-string-literal
@@ -100,7 +103,7 @@ type: element['type'],
 // tslint:disable-next-line: no-string-literal
 webkitRelativePath: element['webkitRelativePath']
       };
-      this.listOfDocuments.push(file);
+      this.equipmentListService.listOfDocuments.push(file);
     });
   }
 

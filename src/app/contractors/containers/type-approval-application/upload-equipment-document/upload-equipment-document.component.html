@@ -15,23 +15,23 @@
                     <img src="assets/icons/wb-incandescent.svg" alt="" /> Select a document below and select all the equipment it applies to in the panel on the right
                 </div>
                 <div class="node-container" style='height: 100%;'>
-                    <div style='height: 60%; overflow-y: scroll; border-bottom: 2px solid #d4d2d2;' *ngIf='listOfDocuments.length > 0'>
-                        <div *ngFor="let document of listOfDocuments" [ngClass]='{active: highlightedDocument === document}' (click)="selectDocument(document); highlightedDocument = document" class="container document-container" style="margin-top: 20px; align-items: center; justify-content: space-between; display: flex;">
+                    <div style='height: 60%; overflow-y: scroll; border-bottom: 2px solid #d4d2d2;' *ngIf='equipmentListService.listOfDocuments.length > 0'>
+                        <div *ngFor="let document of equipmentListService.listOfDocuments" [ngClass]='{active: highlightedDocument === document}' (click)="selectDocument(document); highlightedDocument = document" class="container document-container" style="margin-top: 20px; align-items: center; justify-content: space-between; display: flex;">
                             <div class='document-name'>
-                                <img src="assets/icons/{{document.name.split('.')[1]}}-icon.svg" alt=""> {{ document.name.split('.')[0] }}
+                                <img src="assets/icons/{{document.file.name.split('.')[1]}}-icon.svg" alt=""> {{ document.file.name.split('.')[0] }}
                             </div>
                             <i class="ellipsis vertical icon" (click)='showNodeOptionsModal()'></i>
                         </div>
                     </div>
 
-                    <div class="equipmentDocumentList" *ngIf='equipmentDocuments && listOfDocuments.length !== 0' style='overflow-y: scroll; height: 40%;'>
+                    <div class="equipmentDocumentList" *ngIf='equipmentDocuments && equipmentListService.listOfDocuments.length !== 0' style='overflow-y: scroll; height: 40%;'>
                         <div class='heading'>Documents that apply to
                             <span class="equipmentName">{{this.nameOfSelectedEquipment}}</span>
                         </div>
-                        <div *ngFor='let document of equipmentDocuments' class='document'>{{document.name}}</div>
+                        <div *ngFor='let document of equipmentDocuments' class='document'>{{document.file.name}}</div>
                     </div>
 
-                    <div *ngIf='listOfDocuments.length === 0' class='no-file'>
+                    <div *ngIf='equipmentListService.listOfDocuments.length === 0' class='no-file'>
                         <div>You have not uploaded any file</div>
                         <img src="assets/icons/grey-cloud-icon.svg" alt="">
                     </div>
@@ -44,10 +44,10 @@
                     <form>
                         <ng-template #tmplNode let-node="node">
                             <div class="node-item" [attr.data-id]="node.id" [attr.id]="'node-' + node.id">
-                                <div class="node-title single-equipment-box" (click)='displayEquipmentDocuments(node); !this.selectedDocument || listOfDocuments.length !== 0 ? highlightedEquipment = node : null' [ngClass]='{active: highlightedEquipment === node && listOfDocuments.length !== 0}'>
+                                <div class="node-title single-equipment-box" (click)='displayEquipmentDocuments(node); !this.selectedDocument || equipmentListService.listOfDocuments.length !== 0 ? highlightedEquipment = node : null' [ngClass]='{active: highlightedEquipment === node && equipmentListService.listOfDocuments.length !== 0}'>
                                     <div class="ui checkbox">
-                                        <input type="checkbox" name="{{node.details.equipmentRegulatoryName}}" id="{{node.details.equipmentRegulatoryName}}" (change)="handleDocument(node.key)" (click)='$event.stopPropagation()' ngModel [checked]="node.listOfDocuments.includes(selectedDocument)"
-                                            [disabled]='!this.selectedDocument || listOfDocuments.length === 0' />
+                                        <input type="checkbox" name="{{node.details.equipmentRegulatoryName}}" id="{{node.details.equipmentRegulatoryName}}" (change)="handleDocument(node.key)" (click)='$event.stopPropagation()' ngModel [checked]="node.equipmentListService.listOfDocuments.includes(selectedDocument)"
+                                            [disabled]='!this.selectedDocument || equipmentListService.listOfDocuments.length === 0' />
                                         <label for="{{node.details.equipmentRegulatoryName}}" (click)='$event.stopPropagation()'>
 
                     &nbsp;&nbsp;&nbsp; {{ node.details.equipmentRegulatoryName }} </label>
