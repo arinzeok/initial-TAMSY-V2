@@ -6,9 +6,9 @@
     <div class="bottom">
 
         <div class="form grid ui container stackable" style="justify-content: space-between; margin-top: 7px;">
-            <div class='column ten wide' style="margin-top: 0px">
+            <div class='column nine wide' style="margin-top: 0px">
                 <div class="equipment-tip">
-                    <img src="assets/icons/wb-incandescent.svg" alt="" /> Select an equipment below and enter its details in the panel on the right
+                    <img src="assets/icons/wb-incandescent.svg" alt="" /> Select a specification standard profile below then select all the equipment it applies to in the panel on the right
                 </div>
                 <div class="node-container" style='height: 100%;'>
                     <div style='height: 60%; overflow-y: scroll; border-bottom: 2px solid #d4d2d2;' *ngIf='listOfSpecificationStandards.length > 0'>
@@ -32,8 +32,8 @@
                     </div>
                 </div>
             </div>
-            <div style="margin-top: 0px" class=" column four wide">
-                <div style='font-size: 12px;'>List of equipment for Type Approval Application </div>
+            <div style="margin-top: 0px" class=" column seven wide">
+                <div>List of equipment for Type Approval Application </div>
                 <div class="form-container">
                     <form>
                         <ng-template #tmplNode let-node="node" let-nodId='node.id'>
@@ -69,7 +69,7 @@
         <div class="ui grid stackable container" style="margin-top: 96px;">
             <div class="row" style="justify-content: flex-end;">
                 <app-blue-button [btnType]="['ui', 'primary', 'massive', 'button', 'basic']">Save &amp; Continue Later</app-blue-button>
-                <app-blue-button [btnType]="['ui', 'primary', 'massive', 'button']">Next</app-blue-button>
+                <app-blue-button [btnType]="['ui', 'primary', 'massive', 'button']" routerLink='/contractor/home/type-approval-application/review-and-submit'>Next</app-blue-button>
             </div>
         </div>
     </div>

@@ -57,13 +57,12 @@
             <div class="form-container column seven wide">
                 <form>
                     <div>
-                        <label for="equipment-type">Equipment Type</label>
-                        <select name="" id="equipment-type">
-              <option>-- Select Equipment Type --</option>
-              <option>Option 1</option>
-              <option>Option 2</option>
-              <option>Option 3</option>
-            </select>
+                        <label for="equipmentType">Equipment Type</label>
+                        <select class="selection" [disabled]='!this.selectedNode' name='equipmentType' [(ngModel)]="selectedNode?.details.equipmentType" name="equipmentType" #select>
+                        <option *ngFor="let option of options" [value]="option">
+                          {{option}}
+                        </option>
+                    </select>
                     </div>
                     <div>
                         <label for="regulatory-name">Regulatory Name</label
@@ -72,6 +71,7 @@
               id="regulatory-name"
               name="regulatory-name"
               [(ngModel)]="this.selectedNode?.details.equipmentRegulatoryName"
+              [disabled]='!this.selectedNode'
             />
           </div>
           <div>
@@ -81,6 +81,7 @@
               id="commercial-name"
               name="commercial-name"
               [(ngModel)]="this.selectedNode?.details.commercialName"
+              [disabled]='!this.selectedNode'
             />
           </div>
           <div>
@@ -91,6 +92,7 @@
               id="function-of-the-equipment"
               name="function-of-the-equipment"
               [(ngModel)]="this.selectedNode?.details.functionOfTheEquipment"
+              [disabled]='!this.selectedNode'
             />
           </div>
           <div>
@@ -101,6 +103,7 @@
               id="name-of-the-manufacturer"
               name="name-of-the-manufacturer"
               [(ngModel)]="this.selectedNode?.details.nameOfTheManufacturer"
+              [disabled]='!this.selectedNode'
             />
           </div>
           <div>
@@ -111,6 +114,7 @@
               id="address-of-the-manufacturer"
               name="address-of-the-manufacturer"
               [(ngModel)]="this.selectedNode?.details.addressOfTheManufacturer"
+              [disabled]='!this.selectedNode'
             />
           </div>
           <div>
@@ -120,6 +124,7 @@
               id="year-of-manufacture"
               name="year-of-manufacture"
               [(ngModel)]="this.selectedNode?.details.yearOfManufacture"
+              [disabled]='!this.selectedNode'
             />
           </div>
         </form>

@@ -55,8 +55,11 @@
     >.form.grid {
         height: 84vh;
         column-gap: 40px;
+        @include small-screen {
+            height: auto;
+        }
         >div {
-            margin-top: 20px;
+            margin-top: 50px !important;
         }
         .node-container {
             background: rgba(196, 196, 196, 0.08);
@@ -218,8 +221,9 @@ form {
     i {
         color: #000;
         display: flex;
-        font-size: 30px;
+        font-size: 25px;
         align-items: center;
+        justify-content: center;
     }
 }
 
@@ -229,6 +233,10 @@ form {
         font-size: 20px;
         margin-bottom: 20px;
         color: #666060;
+        margin-left: 20px;
+        @include small-screen {
+            font-size: 16px;
+        }
         .equipmentName {
             color: #000;
             font-weight: bold;
@@ -238,6 +246,9 @@ form {
         padding: 15px 7px;
         border-bottom: 1px solid #dadada;
         font-size: 21px;
+        @include small-screen {
+            font-size: 16px;
+        }
     }
 }
 
@@ -307,7 +318,10 @@ button.add-equipment {
     font-size: 18px;
     font-weight: bold;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
+    @include small-screen {
+        font-size: 16px;
+    }
     img {
         margin-right: 10px;
     }

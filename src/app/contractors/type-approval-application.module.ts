@@ -16,6 +16,8 @@ import { SuiModule } from 'ng2-semantic-ui';
 import { UploadEquipmentDocumentComponent } from './containers/type-approval-application/upload-equipment-document/upload-equipment-document.component';
 import { FileDragAndDropZoneDirective } from '../core/directives/file-drag-and-drop-zone.directive';
 import { AddSpecificationStandardsComponent } from './containers/type-approval-application/add-specification-standards/add-specification-standards.component';
+import { ReviewAndSubmitComponent } from './containers/type-approval-application/review-and-submit/review-and-submit.component';
+import { ApplicationCompeletedComponent } from './containers/type-approval-application/application-compeleted/application-compeleted.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { AddSpecificationStandardsComponent } from './containers/type-approval-a
     SelectCertificateHolderComponent,
     AddEquipmentComponent,
     UploadEquipmentDocumentComponent,
-    AddSpecificationStandardsComponent
+    AddSpecificationStandardsComponent,
+    ReviewAndSubmitComponent,
+    ApplicationCompeletedComponent
   ],
   imports: [
     CommonModule,

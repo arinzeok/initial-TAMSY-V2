@@ -1,5 +1,5 @@
 <div class="main">
-    <div class="ui stackable container grid">
+    <div class="ui stackable container grid" style='padding-bottom: 20px'>
         <div class="info nine wide column">
             <div class="certificate-holder">
                 <label>Certificate Holder</label>
@@ -41,17 +41,19 @@
                 <div class="notification-count">0</div>
             </div>
 
-            <app-blue-button [btnType]="['ui', 'primary', 'basic', 'button']">
-                View Documentation
-            </app-blue-button>
+            <div class="ui grid stackable" style='justify-content: flex-end;'>
+                <app-blue-button [btnType]="['ui', 'primary', 'basic', 'button']" style="padding-right: 0;">
+                    View Documentation
+                </app-blue-button>
 
-            <div class="ui dropdown eServiceDropdown primary basic button" suiDropdown>
-                <div class="text">Action</div>
-                <i class="dropdown icon"></i>
-                <div class="menu" suiDropdownMenu>
-                    <div class="item">Applications</div>
-                    <div class="item">International Students</div>
-                    <div class="item">Scholarships</div>
+                <div class="ui dropdown eServiceDropdown primary basic button actionBtn" suiDropdown>
+                    <div class="text">Action</div>
+                    <i class="dropdown icon"></i>
+                    <div class="menu left transition hidden" suiDropdownMenu>
+                        <div class="item">Applications</div>
+                        <div class="item">International Students</div>
+                        <div class="item">Scholarships</div>
+                    </div>
                 </div>
             </div>
         </div>

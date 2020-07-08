@@ -38,6 +38,11 @@ export class AddEquipmentComponent implements OnInit {
   showNodeOptions = false;
   selectedNodeId: string;
   containerToDeleteFromId: any;
+  options = [
+    'Option1',
+    'Option2',
+    'Option3'
+  ];
 
     constructor(@Inject(DOCUMENT) private document: Document,
                 public modalService: SuiModalService,
@@ -108,25 +113,29 @@ export class AddEquipmentComponent implements OnInit {
 
   // Create a new equipment
   createNewEquipment(form) {
-    const equipmentRegulatoryName = form.value.equipmentRegulatoryName;
-    let equipmentId;
+    if (form.value.equipmentRegulatoryName) {
+      const equipmentRegulatoryName = form.value.equipmentRegulatoryName;
+      let equipmentId;
 
-    if (this.selectedNode) {
+      if (this.selectedNode) {
       equipmentId = `${ this.selectedNode.id }.${this.selectedNode.children.length + 1}`;
     } else {
       equipmentId = `${this.equipmentListService.nodes.length + 1}`;
     }
 
-    const equipmentKey = Math.random() * 400;
+      const equipmentKey = Math.random() * 400;
 
-    const newEquipment = new singleEquipmentNode(equipmentKey, equipmentId, equipmentRegulatoryName);
+      const newEquipment = new singleEquipmentNode(equipmentKey, equipmentId, equipmentRegulatoryName);
 
-    const newEquipmentReference = newEquipment;
-    this.equipmentListService.arrayOfCreatedEquipmentKeys.push(newEquipmentReference);
+      const newEquipmentReference = newEquipment;
+      this.equipmentListService.arrayOfCreatedEquipmentKeys.push(newEquipmentReference);
 
-    this.selectedNode ? this.selectedNode?.children.push(newEquipment) : this.equipmentListService.nodes.push(newEquipment);
+      this.selectedNode ? this.selectedNode?.children.push(newEquipment) : this.equipmentListService.nodes.push(newEquipment);
 
-    this.prepareDragDrop(this.equipmentListService.nodes);
+      this.prepareDragDrop(this.equipmentListService.nodes);
+    } else {
+      return;
+    }
   }
 
   // Duplicate equipment
@@ -155,6 +164,10 @@ export class AddEquipmentComponent implements OnInit {
     const oldItemContainer = this.containerToDeleteFromId !== '' ? this.nodeLookup[this.containerToDeleteFromId].children : this.equipmentListService.nodes;
 
     oldItemContainer.push(duplicateEquipment);
+  }
+
+  console(equipmentType) {
+    console.log(equipmentType);
   }
 
 
