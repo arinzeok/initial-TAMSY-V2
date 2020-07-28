@@ -10,7 +10,6 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem, copyArrayItem } from '
 import { DOCUMENT } from '@angular/common';
 import { pipe } from 'rxjs';
 import { debounce } from '@agentepsilon/decko';
-import { DndDropEvent } from 'ngx-drag-drop';
 import {SuiModalService, TemplateModalConfig, ModalTemplate} from 'ng2-semantic-ui';
 import { singleEquipmentNode } from 'src/app/core/models/singleEquipment';
 import { EquipmentListService } from 'src/app/core/service/equipment-list.service';
@@ -126,6 +125,13 @@ export class AddEquipmentComponent implements OnInit {
       const equipmentKey = Math.random() * 400;
 
       const newEquipment = new singleEquipmentNode(equipmentKey, equipmentId, equipmentRegulatoryName);
+      newEquipment.details.addressOfTheManufacturer = form.value.addressOfTheManufacturer;
+      newEquipment.details.commercialName = form.value.commercialName;
+      newEquipment.details.equipmentRegulatoryName = form.value.regulatoryName;
+      newEquipment.details.equipmentType = form.value.equipmentType;
+      newEquipment.details.functionOfTheEquipment = form.value.functionOfTtheEquipment;
+      newEquipment.details.nameOfTheManufacturer = form.value.nameOfTheManufacturer;
+      newEquipment.details.yearOfManufacture = form.value.yearOfManufacture;
 
       const newEquipmentReference = newEquipment;
       this.equipmentListService.arrayOfCreatedEquipmentKeys.push(newEquipmentReference);

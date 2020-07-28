@@ -1,31 +1,32 @@
 <div class="main">
     <div class="container grid stackable top ui">
-        <div class="certificate-holder-details column container row segment stackable twelve wide">
-            <div class="certificate-holder-name column eight wide">
+        <div class="certificate-holder-details column container row segment stackable wide">
+            <div class="certificate-holder-name column six wide">
                 <label>Certificate Holder</label>
                 <div>Huawei Technologies Co., Ltd.</div>
             </div>
-            <div class="certificate-holder-address column eight wide">
+            <div class="certificate-holder-address column six wide">
                 <label>Address</label>
                 <div>One Apple Park Way Cupertino, CA 95014, USA</div>
             </div>
-            <div></div>
+            <div class="ui vertical divider"></div>
+            <app-blue-button (click)="showAddEquipmentModal(true)" [btnType]="['primary', 'button', 'theme-bg', 'ui']" class="column four wide">Add Equipment</app-blue-button>
         </div>
-        <app-blue-button (click)="showAddEquipmentModal(true)" [btnType]="['primary', 'button', 'massive', 'ui']" class='column four wide'>Add Equipment</app-blue-button>
     </div>
     <div class="bottom">
-        <div class="info-panel" *ngIf="!this.equipmentListService.nodes.length">
-            <div class="img-container">
-                <img src="assets/icons/Info Panel.svg" alt="" />
-                <img src="assets/icons/Info Arrow.svg" alt="" />
-            </div>
-        </div>
-        <div class="equipment-tip">
-            <img src="assets/icons/wb-incandescent.svg" alt="" /> Select an equipment below and enter its details in the panel on the right
+        <h3 class="theme-color">Equipment</h3>
+        <div class="ui divider theme-bg"></div>
+
+        <div *ngIf="!this.equipmentListService.nodes.length" class="ui grid" style="justify-content: center;">
+            <img class="row" src="assets/icons/no-item-added.svg" alt="" height="200px" />
+            <h3 class="theme-color row" style="margin-bottom: 5px; padding: 0;">
+                There are no items here
+            </h3>
+            <span class="row" style="padding: 0;">Click here to add new items</span>
         </div>
 
-        <div class="form grid ui container stackable" style='justify-content: space-between; margin-top: 7px;'>
-            <div class="node-container column seven wide">
+        <div *ngIf="this.equipmentListService.nodes.length" class="form grid ui container stackable" style="justify-content: space-between; margin-top: 7px;">
+            <div class="node-container column six wide">
                 <ng-template #tmplNode let-node="node">
                     <div class="node-item" [attr.data-id]="node.id" [attr.id]="'node-' + node.id">
                         <div class="node-title single-equipment-box" [ngClass]="{ active: selectedNode?.key === node.key }" (click)="node.isExpanded = !node.isExpanded">
@@ -54,123 +55,116 @@
                     </div>
                 </div>
             </div>
-            <div class="form-container column seven wide">
-                <form>
-                    <div>
-                        <label for="equipmentType">Equipment Type</label>
-                        <select class="selection" [disabled]='!this.selectedNode' name='equipmentType' [(ngModel)]="selectedNode?.details.equipmentType" name="equipmentType" #select>
-                        <option *ngFor="let option of options" [value]="option">
-                          {{option}}
-                        </option>
-                    </select>
+            <div class="form-container column nine wide">
+                <div class="ui middle aligned divided list">
+                    <div class="item">
+                        <div class="content">
+                            <label for="" class="ui label">
+                      Equipment Type
+                    </label>
+                            <a class="header">{{this.selectedNode?.details.equipmentType}}</a>
+                        </div>
                     </div>
-                    <div>
-                        <label for="regulatory-name">Regulatory Name</label
-            ><input
-              type="text"
-              id="regulatory-name"
-              name="regulatory-name"
-              [(ngModel)]="this.selectedNode?.details.equipmentRegulatoryName"
-              [disabled]='!this.selectedNode'
-            />
-          </div>
-          <div>
-            <label for="commercial-name">Commercial Name</label
-            ><input
-              type="text"
-              id="commercial-name"
-              name="commercial-name"
-              [(ngModel)]="this.selectedNode?.details.commercialName"
-              [disabled]='!this.selectedNode'
-            />
-          </div>
-          <div>
-            <label for="function-of-the-equipment"
-              >Function Of The Equipment</label
-            ><input
-              type="text"
-              id="function-of-the-equipment"
-              name="function-of-the-equipment"
-              [(ngModel)]="this.selectedNode?.details.functionOfTheEquipment"
-              [disabled]='!this.selectedNode'
-            />
-          </div>
-          <div>
-            <label for="name-of-the-manufacturer"
-              >Name Of The Manufacturer</label
-            ><input
-              type="text"
-              id="name-of-the-manufacturer"
-              name="name-of-the-manufacturer"
-              [(ngModel)]="this.selectedNode?.details.nameOfTheManufacturer"
-              [disabled]='!this.selectedNode'
-            />
-          </div>
-          <div>
-            <label for="address-of-the-manufacturer"
-              >Address Of The Manufacturer</label
-            ><input
-              type="text"
-              id="address-of-the-manufacturer"
-              name="address-of-the-manufacturer"
-              [(ngModel)]="this.selectedNode?.details.addressOfTheManufacturer"
-              [disabled]='!this.selectedNode'
-            />
-          </div>
-          <div>
-            <label for="year-of-manufacture">Year Of Manufacture</label
-            ><input
-              type="number"
-              id="year-of-manufacture"
-              name="year-of-manufacture"
-              [(ngModel)]="this.selectedNode?.details.yearOfManufacture"
-              [disabled]='!this.selectedNode'
-            />
-          </div>
-        </form>
-      </div>
+                    <div class="item">
+                        <div class="content">
+                            <label for="" class="ui label">
+                      Regulatory Name
+                    </label>
+                            <a class="header">{{this.selectedNode?.details.equipmentRegulatoryName}}</a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="content">
+                            <label for="" class="ui label">
+                      Commercial Name
+                    </label>
+                            <a class="header">{{this.selectedNode?.details.commercialName}}</a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="content">
+                            <label for="" class="ui label">
+                      Function Of The Equipment
+                    </label>
+                            <a class="header">{{this.selectedNode?.details.functionOfTheEquipment}}</a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="content">
+                            <label for="" class="ui label">
+                      Name Of The Manufacturer
+                    </label>
+                            <a class="header">{{this.selectedNode?.details.nameOfTheManufacturer}}</a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="content">
+                            <label for="" class="ui label">
+                      Address Of Manufacturer
+                    </label>
+                            <a class="header">{{this.selectedNode?.details.addressOfManufacturer}}</a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="content">
+                            <label for="" class="ui label">
+                      Year Of Manufacture
+                    </label>
+                            <a class="header">{{this.selectedNode?.details.yearOfManufacture}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="ui grid stackable container" style="margin-top: 96px;">
-      <div class="row" style="justify-content: flex-end;">
-        <app-blue-button
-          [btnType]="['ui', 'primary', 'massive', 'button', 'basic']"
-          >Save &amp; Continue Later</app-blue-button
-        >
-        <app-blue-button [btnType]="['ui', 'primary', 'massive', 'button']" routerLink='/contractor/home/type-approval-application/upload-equipment-document'
-          >Next</app-blue-button
-        >
-      </div>
-    </div>
-  </div>
 </div>
 
-<sui-modal
-  [isClosable]="true"
-  [size]="'mini'"
-  (dismissed)="show = false"
-  *ngIf="show"
-  #modal
->
-  <div class="header">New Equipment</div>
-  <div class="content">
-    <form (ngSubmit)="createNewEquipment(form); show = false" #form="ngForm">
-      <div>
-        <label for="new-equipment-label">Equipment Regulatory Name</label>
-                        <input type="text" name="equipmentRegulatoryName" ngModel />
-                    </div>
-                    <div class="button-container">
-                        <app-blue-button [btnType]="['basic', 'primary', 'ui', 'button']">Done</app-blue-button>
-                    </div>
-                </form>
+<sui-modal [isClosable]="true" [size]="'small'" (dismissed)="show = false" *ngIf="show" #modal>
+    <div class="header theme-color">Add New Equipment</div>
+    <div class="content">
+        <form (ngSubmit)="createNewEquipment(form); show = false" #form="ngForm">
+            <div>
+                <input type="text" name="equipmentRegulatoryName" placeholder="Equipment Regulatory Name" ngModel />
             </div>
-            </sui-modal>
-            <sui-modal [isClosable]="true" [size]="'mini'" (dismissed)="hideNodeOptionsModal()" *ngIf="showNodeOptions" #modal>
-                <div class="content">
-                    <div (click)="showAddEquipmentModal()" class="node-option">
-                        ADD EQUIPMENT HERE
-                    </div>
-                    <div (click)="duplicateEquipment()" class="node-option">DUPLICATE</div>
-                    <div (click)="deleteEquipment()" class="node-option">DELETE</div>
-                </div>
-            </sui-modal>
+            <div>
+                <select class="selection" name="equipmentType" #select>
+                          <option value="">Equipment Type</option>
+          <option *ngFor="let option of options" [value]="option">
+            {{ option }}
+          </option>
+        </select>
+            </div>
+            <div>
+                <input type="text" id="regulatory-name" name="regulatoryName" ngModel placeholder="Regulatory Name" />
+            </div>
+            <div>
+                <input type="text" id="commercial-name" name="commercialName" ngModel placeholder="Commercial Name" />
+            </div>
+            <div>
+                <textarea type="text" id="function-of-the-equipment" name="functionOfTtheEquipment" ngModel placeholder="Function Of The Equipment"></textarea>
+            </div>
+            <div>
+                <input type="text" id="name-of-the-manufacturer" name="nameOfTheManufacturer" ngModel placeholder="Name Of The Manufacturer" />
+            </div>
+            <div>
+                <input type="text" id="addressOfTheManufacturer" name="address-of-the-manufacturer" ngModel placeholder="Address Of The Manufacturer" />
+            </div>
+            <div>
+                <input type="number" id="yearOfManufacture" name="year-of-manufacture" ngModel placeholder="Year Of Manufacture" />
+            </div>
+            <div class="ui divider"></div>
+            <div class="button-container">
+                <app-blue-button [btnType]="['basic', 'primary', 'ui', 'button']">Done</app-blue-button>
+            </div>
+        </form>
+    </div>
+</sui-modal>
+<sui-modal [isClosable]="true" [size]="'mini'" (dismissed)="hideNodeOptionsModal()" *ngIf="showNodeOptions" #modal>
+    <div class="content">
+        <div (click)="showAddEquipmentModal()" class="node-option">
+            ADD EQUIPMENT HERE
+        </div>
+        <div (click)="duplicateEquipment()" class="node-option">DUPLICATE</div>
+        <div (click)="deleteEquipment()" class="node-option">DELETE</div>
+    </div>
+</sui-modal>

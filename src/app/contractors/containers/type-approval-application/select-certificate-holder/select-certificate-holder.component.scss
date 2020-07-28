@@ -1,11 +1,13 @@
+$border: 1px solid rgba(196, 196, 196, 0.92);
+$labelColor: #666060;
 @font-face {
     font-family: RobotoLight;
-    src: url('src/assets/fonts/Roboto/Roboto-Light.ttf');
+    src: url('/src/assets/fonts/Roboto/Roboto-Light.ttf');
 }
 
 @font-face {
     font-family: RobotoMedium;
-    src: url('src/assets/fonts/Roboto/Roboto-Medium.ttf');
+    src: url('/src/assets/fonts/Roboto/Roboto-Medium.ttf');
 }
 
 @mixin small-screen {
@@ -16,7 +18,6 @@
 
 .container {
     padding: 0;
-    padding-bottom: 40px;
 }
 
 .main {
@@ -24,15 +25,14 @@
     .info {
         .info-header-container {
             .header {
-                font-size: 32px;
-                color: #000;
-                font-family: RobotoLight, sans-serif;
+                font-size: 24px;
+                font-family: RobotoMedium, sans-serif;
                 margin-bottom: 21px;
             }
             .sub-header {
-                color: #9C9C9C;
-                font-size: 20px;
-                font-family: RobotoLight, sans-serif;
+                color: #505050;
+                font-size: 16px;
+                font-family: RobotoMedium, sans-serif;
                 line-height: 1.5em;
                 width: 86%;
                 a {
@@ -52,36 +52,57 @@
             display: none;
         }
         input:checked~label {
-            border: 3px solid #18A0FB;
+            border: 2px solid #3F4395;
         }
-        input:checked~label .custom-radio-icon>.custom-radio-icon-inner {
-            background-color: #18A0FB;
+        input:checked~label .custom-radio-icon {
+            background-color: #3F4395;
+            border: none;
+        }
+        input:checked~label .custom-radio-icon>i {
+            display: flex;
+            color: #fff;
+            justify-content: center;
+            align-items: center;
         }
         label {
             align-items: center;
             color: #9C9C9C;
             border-radius: 10px;
             padding: 10px 0;
+            padding-bottom: 0;
             cursor: pointer;
+            @include small-screen {
+                flex-flow: row;
+                .list {
+                    .item {
+                        margin-left: 0;
+                    }
+                }
+            }
             .custom-radio-icon {
-                height: 40px;
-                width: 40px;
+                height: 20px;
+                width: 20px;
                 border-radius: 50%;
                 border: 1px solid #9C9C9C;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 margin: 0 auto;
-                .custom-radio-icon-inner {
-                    height: 60%;
-                    width: 60%;
-                    border-radius: 50%;
+                i {
+                    display: none;
+                    margin: 0;
                 }
             }
             .detail-container {
-                display: flex;
                 justify-content: space-between;
-                width: 79%;
+                width: 95%;
+                align-items: center;
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                justify-items: center;
+                @include small-screen {
+                    display: flex;
+                }
                 span {
                     color: #9C9C9C;
                     text-transform: uppercase;
@@ -89,24 +110,19 @@
                 }
                 h3 {
                     margin-top: 0;
-                    font-size: 20px;
+                    font-size: 18px;
                     margin-bottom: 10px;
-                    color: #000000;
                 }
                 >div {
                     padding: 10px 0;
                     padding-left: 10px;
-                }
-                >div:last-child {
-                    border-left: 1px solid #9C9C9C;
-                    align-self: center;
-                    padding: 20px 30px;
                     @include small-screen {
-                        border-top: 1px solid #9C9C9C;
-                        border-left: none;
-                        margin-left: 16px;
                         padding-left: 0;
                     }
+                }
+                >div:last-child {
+                    align-self: center;
+                    padding: 20px 30px;
                 }
                 div.detail {
                     color: #666060;
@@ -121,6 +137,61 @@
                 margin-left: auto;
                 margin-right: 15px;
             }
+        }
+    }
+}
+
+.panel {
+    background: #F0F1F8;
+    margin-top: 20px;
+    .forms-container {
+        display: flex;
+        @include small-screen {
+            display: flow-root;
+        }
+        >div:not(:first-child) {
+            display: flex;
+            margin-left: 20px;
+            @include small-screen {
+                margin-left: 0;
+                margin-top: 15px;
+            }
+        }
+        .display {
+            align-self: center;
+            label {
+                color: $labelColor;
+                font-size: 14px;
+            }
+            select {
+                border: $border;
+                border-radius: 4px;
+                height: 30px;
+                background: none;
+                margin-left: 10px;
+                width: 90px;
+                padding: 0 10px;
+                color: $labelColor;
+            }
+        }
+        .row {
+            display: flex;
+            align-self: center;
+            label {
+                color: $labelColor;
+                font-size: 14px;
+            }
+            div {
+                margin-left: 10px;
+                font-size: 14px;
+            }
+        }
+    }
+    .button-container {
+        display: flex;
+        align-content: flex-end;
+        >:first-child {
+            margin-right: 15px;
         }
     }
 }

@@ -1,11 +1,22 @@
 @font-face {
     font-family: RobotoLight;
-    src: url("src/assets/fonts/Roboto/Roboto-Light.ttf");
+    src: url("/src/assets/fonts/Roboto/Roboto-Light.ttf");
 }
 
 @mixin small-screen {
     @media screen and (max-width: 768px) {
         @content;
+    }
+}
+
+app-blue-button {
+    display: flex !important;
+    justify-content: flex-end;
+    border-left: 1px solid #000;
+    width: 19% !important;
+    @include small-screen {
+        border-left: none;
+        width: auto !important;
     }
 }
 
@@ -121,44 +132,6 @@ form {
         display: flex;
         >* {
             margin-left: auto;
-        }
-    }
-}
-
-.info-panel {
-    position: absolute;
-    display: flex;
-    justify-content: space-around;
-    border: 1px solid rgba(196, 196, 196, 0.92);
-    width: 100%;
-    height: 100%;
-    align-items: flex-start;
-    background: rgba(225, 225, 225, 0.2);
-    .img-container {
-        width: 75%;
-        z-index: 1;
-        @include small-screen {
-            width: auto;
-            z-index: 1;
-            flex-wrap: wrap-reverse;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        img:first-child {
-            margin-top: 80px;
-            width: 75%;
-            @include small-screen {
-                margin-top: 0px;
-                width: 100%;
-                height: 120px;
-            }
-        }
-    }
-    img:last-child {
-        width: 25%;
-        @include small-screen {
-            width: 52%;
         }
     }
 }

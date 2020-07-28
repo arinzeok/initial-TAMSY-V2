@@ -1,12 +1,14 @@
 <div class="container main ui">
 
-    <sui-tabset>
-        <div class="ui pointing secondary menu stackable grid">
-            <a class="item" routerLink='/contractor/home/type-approval-application/select-certificate-holder' routerLinkActive='active'>Select Certificate Holder</a>
-            <a class="item" routerLink='/contractor/home/type-approval-application/add-equipment' routerLinkActive='active'>Add Equipment</a>
-            <a class="item" routerLink='/contractor/home/type-approval-application/upload-equipment-document' routerLinkActive='active'>Upload Equipment Document</a>
-            <a class="item" routerLink='/contractor/home/type-approval-application/add-specification-standards' routerLinkActive='active'>Add Specification Standards</a>
-            <a class="item" routerLink='/contractor/home/type-approval-application/review-and-submit' routerLinkActive='active'>Review and Submit</a>
+    <div class="ui grid"></div>
+
+    <sui-tabset style="display: flex;">
+        <div class="ui tablet stackable steps" style="margin: 0 auto;">
+            <a class="step" routerLink='/contractor/home/type-approval-application/select-certificate-holder' routerLinkActive='theme-bg'><span class="ui circular label">1</span> Select Certificate Holder</a>
+            <a class="step" routerLink='/contractor/home/type-approval-application/add-equipment' routerLinkActive='theme-bg'> <span class="ui circular label">2</span> Add Equipment</a>
+            <a class="step" routerLink='/contractor/home/type-approval-application/upload-equipment-document' routerLinkActive='theme-bg'> <span class="ui circular label">3</span> Upload Equipment Document</a>
+            <a class="step" routerLink='/contractor/home/type-approval-application/add-specification-standards' routerLinkActive='theme-bg'> <span class="ui circular label">4</span> Add Specification Standards</a>
+            <a class="step" routerLink='/contractor/home/type-approval-application/review-and-submit' routerLinkActive='theme-bg'> <span class="ui circular label">5</span> Review and Submit</a>
         </div>
     </sui-tabset>
 

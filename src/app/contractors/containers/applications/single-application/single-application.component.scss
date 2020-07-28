@@ -8,19 +8,19 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px solid #DADADA;
     .info {
+        justify-content: space-between;
+        border: 1px solid #DCDCDC;
+        .certificate-holder {
+            margin-top: 1em;
+        }
         span.certficate-holder-name {
             color: #1F5FBE;
             font-weight: normal;
             display: block;
-            font-size: 20px;
+            font-size: 18px;
             margin-top: 10px;
             margin-bottom: 10px;
-        }
-        .application-id {
-            color: #1F5FBE;
         }
         /* ul {
             list-style: none;
@@ -78,14 +78,18 @@
     }
     div.list-heading {
         text-transform: uppercase;
-        color: #9C9C9C;
-        font-size: 12px;
+        color: #AEAEAE;
+        font-size: 10px;
         margin-bottom: 5px;
     }
     .buttons {
-        margin-top: 45px;
+        width: 32%;
         display: flex;
         align-items: center;
+        justify-content: space-between;
+        @include small-screen {
+            width: 100%;
+        }
         select {
             margin-left: 15px;
             background-color: #fff;
@@ -102,22 +106,133 @@
             padding-bottom: 10px;
         }
         .notification {
-            margin-right: 25px;
             position: relative;
-            display: inline-block;
-            align-self: center;
-            margin-left: auto;
+            i {
+                font-size: 25px;
+                color: #86879D;
+            }
             .notification-count {
                 position: absolute;
-                top: -10px;
-                right: -10px;
-                padding: 5px 10px;
-                border-radius: 50px;
+                top: -3px;
+                right: 0px;
+                padding: 0px 5px;
+                border-radius: 58px;
                 color: #fff;
-                background-color: #E50B0B;
-                font-size: 14px;
+                background-color: #FF2C2C;
+                font-size: 8px;
+                border: 1px solid #fff;
+                height: 12px;
+                display: flex;
+                align-items: center;
             }
         }
+    }
+}
+
+.content {
+    span {
+        font-size: 14px;
+    }
+}
+
+.dropdown-icon {
+    border-radius: 500px;
+    background-color: #F0F1F8;
+    padding: 8px 7px;
+    display: flex;
+    font-size: 20px;
+    align-items: center;
+    justify-content: center;
+    color: #86879D;
+    cursor: pointer;
+    i {
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+    }
+}
+
+.label {
+    border-radius: 30px;
+    padding-left: 18px;
+    padding-right: 18px;
+    text-transform: uppercase;
+    font-weight: 100;
+    font-size: 9px;
+    color: #fff;
+}
+
+.label.notstarted {
+    background-color: #AEAEAE;
+}
+
+.label.canceled {
+    background-color: #FF2C2C;
+}
+
+.label.inprogress {
+    background-color: #F0AC29;
+}
+
+.label.completed {
+    background-color: #51A96F;
+}
+
+.label.ongoing {
+    background-color: #4BBEFF;
+}
+
+table {
+    background-color: #FBFBFF;
+    th {
+        background: #86879d33;
+        border-collapse: collapse;
+    }
+    .icon-container {
+        padding: 8px;
+        background-color: #F0F1F8;
+        border-radius: 500px;
+        i {
+            color: #86879D;
+            display: flex;
+            align-items: center;
+            font-size: 18px;
+            margin: 0;
+            justify-content: center;
+        }
+    }
+    .notification {
+        background-color: #F0F1F8;
+        border-radius: 500px;
+        position: relative;
+        padding: 11px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 33px;
+        i {
+            color: #86879D;
+            display: flex;
+            align-items: center;
+            font-size: 18px;
+            margin: 0;
+        }
+        .notification-count {
+            height: 8px;
+            width: 8px;
+            border-radius: 500px;
+            background-color: #FF2C2C;
+            position: absolute;
+            top: 10px;
+            left: 22px;
+            border: 1px solid #fff;
+        }
+    }
+    .actionsContainer {
+        display: flex;
+        justify-content: space-between;
     }
 }
 

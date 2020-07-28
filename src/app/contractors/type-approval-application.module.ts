@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 // import { PriDragDropModule } from '@angular/cdk';
-import { PriDragDropModule } from 'pri-ng-dragdrop';
 
 import { TypeApprovalApplicationRoutingModule } from './type-approval-application-routing.module';
 import { GetStartedComponent } from './containers/type-approval-application/get-started/get-started.component';
@@ -11,7 +10,6 @@ import { TypeApprovalApplicationComponent } from './containers/type-approval-app
 import { SelectCertificateHolderComponent } from './containers/type-approval-application/select-certificate-holder/select-certificate-holder.component';
 import { AddEquipmentComponent } from './containers/type-approval-application/add-equipment/add-equipment.component';
 import { FormsModule } from '@angular/forms';
-import { DndModule } from 'ngx-drag-drop';
 import { SuiModule } from 'ng2-semantic-ui';
 import { UploadEquipmentDocumentComponent } from './containers/type-approval-application/upload-equipment-document/upload-equipment-document.component';
 import { FileDragAndDropZoneDirective } from '../core/directives/file-drag-and-drop-zone.directive';
@@ -37,8 +35,6 @@ import { ApplicationCompeletedComponent } from './containers/type-approval-appli
     SharedModule,
     FormsModule,
     DragDropModule,
-    PriDragDropModule,
-    DndModule,
     SuiModule
   ]
 })

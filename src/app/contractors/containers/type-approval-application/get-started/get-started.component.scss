@@ -1,11 +1,16 @@
 @font-face {
     font-family: RobotoLight;
-    src: url('src/assets/fonts/Roboto/Roboto-Light.ttf');
+    src: url('../../../../..//assets/fonts/Roboto/Roboto-Light.ttf');
+}
+
+@font-face {
+    font-family: RobotoBold;
+    src: url('../../../../../assets/fonts/Roboto/Roboto-Bold.ttf');
 }
 
 @font-face {
     font-family: RobotoMedium;
-    src: url('src/assets/fonts/Roboto/Roboto-Medium.ttf');
+    src: url('../../../../..//assets/fonts/Roboto/Roboto-Medium.ttf');
 }
 
 .container {
@@ -17,11 +22,9 @@
     .info-header-container {
         margin-top: 50px;
         .header {
-            font-size: 32px;
-            color: #000;
-            font-family: RobotoLight, sans-serif;
-            margin-bottom: 21px;
-            line-height: 1.5em;
+            font-size: 24px;
+            font-family: RobotoMedium, sans-serif;
+            line-height: 28px;
         }
         .sub-header {
             color: #9C9C9C;
@@ -33,20 +36,15 @@
     .info {
         .info-body {
             ul {
-                list-style: none;
                 margin: 0;
                 padding: 0;
                 display: grid;
                 grid-row-gap: 36px;
                 margin-right: 50px;
+                margin-left: 35px;
                 li {
-                    display: grid;
-                    align-items: center;
-                    grid-template-columns: 0.02fr 1fr;
-                    grid-column-gap: 20px;
-                    grid-row-gap: 30px;
-                    font-size: 20px;
-                    font-family: RobotoLight, sans-serif;
+                    font-size: 18px;
+                    // font-family: RobotoLight, sans-serif;
                     span {
                         background-color: rgba(24, 160, 251, 0.19);
                         border-radius: 50%;

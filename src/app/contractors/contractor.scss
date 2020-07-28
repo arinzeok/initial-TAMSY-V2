@@ -1,4 +1,15 @@
 $NCC-blue: linear-gradient(180deg, #010165 0%, rgba(1, 1, 101, 0.81) 129.99%);
+$active-link: #1F5FBE;
+@font-face {
+    font-family: RobotoLight;
+    src: url('../../assets/fonts/Roboto/Roboto-Light.ttf');
+}
+
+@font-face {
+    font-family: RobotoBold;
+    src: url('../../assets/fonts/Roboto/Roboto-Bold.ttf');
+}
+
 @mixin small-screen {
     @media screen and (max-width: 768px) {
         @content;
@@ -7,9 +18,9 @@ $NCC-blue: linear-gradient(180deg, #010165 0%, rgba(1, 1, 101, 0.81) 129.99%);
 
 nav {
     .top {
-        padding-top: 40px;
-        padding-bottom: 40px;
-        background: $NCC-blue;
+        padding-top: 25px;
+        padding-bottom: 21px;
+        position: relative;
         img {
             cursor: pointer;
             @include small-screen {
@@ -23,21 +34,6 @@ nav {
         .nav {
             display: flex;
             align-items: center;
-            select {
-                border: none;
-                background: none;
-                color: #fff;
-            }
-            .eServices-app {
-                margin-right: 30px;
-            }
-            .profile {
-                display: flex;
-                align-items: center;
-            }
-        }
-        .eServiceDropdown {
-            margin-right: 30px;
         }
         .dropdown {
             margin-left: 17px;
@@ -51,21 +47,69 @@ nav {
         }
     }
     .bottom {
-        background: $NCC-blue;
+        background: #36397F;
         color: #fff;
         padding-top: 20px;
-        padding-bottom: 20px;
+        padding-bottom: 14px;
+        width: 100%;
         >div {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        .company-name {
-            align-items: flex-end;
-            display: flex;
-            img {
-                margin-right: 10px;
-            }
-        }
+    }
+}
+
+.e-services {
+    align-items: flex-end;
+    display: flex;
+    color: #fff;
+    font-size: 12px;
+    img {
+        margin-right: 10px;
+    }
+}
+
+.ui.secondary.pointing.menu .active.item {
+    color: #4BBEFF;
+    border-color: #4BBEFF;
+}
+
+.ui.secondary.pointing.menu .item {
+    color: #fff;
+    margin-right: 15px;
+    font-size: 14px;
+    font-family: RobotoLight, sans-serif;
+    font-weight: normal;
+    .notification {
+        height: 7px;
+        width: 7px;
+        border-radius: 500px;
+        background-color: #FF2C2C;
+        position: relative;
+        top: -5px;
+        left: 6px;
+    }
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    .logo-label {
+        color: #fff;
+        display: inline-block;
+        margin-left: 15px;
+        border-left: 1px solid #fff;
+        padding: 5px 0;
+        padding-left: 12px;
+        align-self: center;
+        font-size: 16px;
+        font-family: RobotoBold, sans-serif;
+    }
+}
+
+div.ui.dropdown {
+    div.text {
+        font-family: RobotoLight, sans-serif !important;
     }
 }

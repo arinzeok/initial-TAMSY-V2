@@ -1,42 +1,49 @@
-<div class="ui bottom vertical basic segment tab active no-padding">
-    <div class="basic fill segment ui top attached sd">
-        <div class='panel ui grid two stackable column'>
-            <div class='column' style='width: 50%;'>
-                <span>
-        <div class="ui mini icon input" style='margin: 5px;'>
-            <input type="text" placeholder="Search mini...">
+<div class='ui grid stackable top'>
+    <div>
+        <label class='bread-crumb'>Home / Applications</label>
+        <div style='margin-top: 1px;' class="header theme-color">Applications</div>
+    </div>
+    <div>
+        <app-blue-button [btnType]='["ui", "theme-bg", "button", "primary"]' routerLink='/contractor/home/type-approval-application/get-started'>New Application</app-blue-button>
+    </div>
+</div>
+
+<div class="ui bottom vertical basic segment tab active no-padding" style="border-radius: 4px;">
+    <div class="basic fill ui attached sd">
+        <div class="panel ui grid two stackable column container">
+            <div class="column" style="width: 50%;">
+                <span style="margin-right: 30px;">
+          <div class="ui mini icon input" style="margin: 5px;">
+            <input type="text" placeholder="Search mini..." style="border: none;"/>
             <i class="search icon"></i>
-        </div>
-      </span>
-                <span class="ui mini icon input" style='margin: 5px;'>
-            <label>
-              Display
-            <select class="ui mini search dropdown" #select>
-              <option value="">State</option>
-              <option value="AL">Alabama</option>
-              <option value="AK">Alaska</option>
-              <option value="AZ">Arizona</option>
-              <option value="AR">Arkansas</option>
-              <option value="CA">California</option>
-              <option value="CO">Colorado</option>
-              <option value="CT">Connecticut</option>
-            </select> Rows
-            </label>
+          </div>
+        </span>
+                <span class="ui mini icon input" style="margin: 5px;">
+          <label style="font-size: 12px; color: #6A6A6A;">
+            Display
+            <div class="ui compact selection dropdown" style="border: none;">
+              <i class="dropdown icon"></i>
+              <div class="text">Compact</div>
+              <div class="menu">
+                <div class="item">A</div>
+                <div class="item">B</div>
+                <div class="item">C</div>
+              </div>
+            </div>
+            Rows
+          </label>
         </span>
             </div>
-            <div class='column' style='width: 50%; display: flex; justify-content: flex-end;'>
-                <app-blue-button [btnType]='["ui", "primary", "basic", "button"]' class="five column wide">
-                    Advanced Search
-                </app-blue-button>
-                <app-blue-button [btnType]='["ui", "primary", "button"]' class="six column wide" routerLink='/contractor/home/type-approval-application/get-started'>
-                    Apply for Type Approval
-                </app-blue-button>
+            <div class="column action-icons" style="width: 50%; display: flex; justify-content: flex-end; align-items: center;">
+                <i class="filter icon" style='margin-right: 30px;'></i>
+                <img src="assets/icons/sort-icon.svg" alt="">
             </div>
         </div>
     </div>
 </div>
 
-<div class='ui segment'>
+<div style="margin-top: 30px; margin-bottom: 30px;">
+    <app-single-application></app-single-application>
     <app-single-application></app-single-application>
 </div>
 
@@ -46,7 +53,7 @@
             <div class="ui icon button">
                 <i class="database icon"></i>
             </div>
-            <a class='ui basic label'>3 Record(s)</a>
+            <a class="ui basic label">3 Record(s)</a>
         </div>
     </div>
     <div class="column right aligned pagination menu">
