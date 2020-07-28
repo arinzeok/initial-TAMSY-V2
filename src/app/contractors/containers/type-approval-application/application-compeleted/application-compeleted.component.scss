@@ -1,0 +1,55 @@
+@font-face {
+    font-family: RobotoLight;
+    src: url('/src/assets/fonts/Roboto/Roboto-Light.ttf');
+}
+
+@font-face {
+    font-family: RobotoMedium;
+    src: url('/src/assets/fonts/Roboto/Roboto-Medium.ttf');
+}
+
+.container {
+    padding-bottom: 40px;
+}
+
+.main {
+    margin-top: 30px;
+    .info-header-container {
+        margin-top: 50px;
+        .header {
+            font-size: 32px;
+            color: #000;
+            font-family: RobotoLight, sans-serif;
+            margin-bottom: 21px;
+            line-height: 1.5em;
+        }
+        .sub-header {
+            color: #9C9C9C;
+            font-size: 20px;
+            font-family: RobotoLight, sans-serif;
+            line-height: 1.5em;
+        }
+    }
+    .info {
+        .info-body {
+            p {
+                font-size: 20px;
+                font-family: RobotoLight, sans-serif;
+            }
+        }
+    }
+}
+
+.button-container {
+    display: inline-flex;
+    flex-direction: column;
+    text-align: center;
+    margin-left: auto;
+    .not-right-now {
+        padding: 6px 0;
+        cursor: pointer;
+        font-size: 20px;
+        color: #9C9C9C;
+        margin-top: 10px;
+    }
+}

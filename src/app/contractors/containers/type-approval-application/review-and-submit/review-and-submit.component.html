@@ -1,0 +1,162 @@
+<div class="main">
+    <div class="container grid stackable top ui">
+        <div class="certificate-holder-details column container row segment stackable twelve wide">
+            <div class="certificate-holder-name column eight wide">
+                <label>Certificate Holder</label>
+                <div>Huawei Technologies Co., Ltd.</div>
+            </div>
+            <div class="certificate-holder-address column eight wide">
+                <label>Address</label>
+                <div>One Apple Park Way Cupertino, CA 95014, USA</div>
+            </div>
+        </div>
+    </div>
+    <div class="bottom">
+        <div class="equipment-tip">
+            <img src="assets/icons/wb-incandescent.svg" alt="" /> Select an equipment below and enter its details in the panel on the right
+        </div>
+
+        <div class="form grid ui container stackable" style="justify-content: space-between; margin-top: 7px;">
+            <div class="node-container column seven wide">
+                <ng-template #tmplNode let-node="node">
+                    <div class="node-item" [attr.data-id]="node.id" [attr.id]="'node-' + node.id">
+                        <div class="node-title single-equipment-box" [ngClass]="{ active: selectedNode?.key === node.key }" (click)="node.isExpanded = !node.isExpanded">
+                            <div>
+                                {{ node.children.length ? node.isExpanded ? "" : "" : "&nbsp;&nbsp;&nbsp;" }} &nbsp;&nbsp;&nbsp; {{ node.details.equipmentRegulatoryName }}
+                            </div>
+                        </div>
+
+                        <div class="node-children" [id]="node.id">
+                            <div *ngFor="let child of node.children" (click)="
+                  selectSingleEquipment(child.key); $event.stopPropagation()
+                ">
+                                <ng-container *ngTemplateOutlet="tmplNode; context: { node: child }"></ng-container>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+
+                <div [id]="'main'">
+                    <div *ngFor="let node of this.equipmentListService.nodes" (click)="selectSingleEquipment(node.key); $event.stopPropagation()">
+                        <ng-container *ngTemplateOutlet="tmplNode; context: { node: node }"></ng-container>
+                    </div>
+                </div>
+            </div>
+            <div class="column eight wide">
+                <form class="form-container" *ngFor="
+            let item of this.equipmentListService.arrayOfCreatedEquipmentKeys
+          ">
+                    <h2 class="header">{{ item.details.equipmentRegulatoryName }}</h2>
+                    <div>
+                        <div class="section-title">Equipment Details</div>
+                        <div class="ui middle aligned divided list">
+                            <div class="ui stackable grid item container">
+                                <div class="row" style="justify-content: space-between;">
+                                    <div class="content">
+                                        <div class="header">Regulatory Name</div>
+                                        {{ item.details.equipmentRegulatoryName }}
+                                    </div>
+                                    <div class="content">
+                                        <div class="header">Equipment Type</div>
+                                        {{ item.details.equipmentType }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ui stackable grid item container">
+                                <div class="row" style="justify-content: space-between;">
+                                    <div class="content">
+                                        <div class="header">Commercial Name</div>
+                                        {{ item.details.commercialName }}
+                                    </div>
+                                    <div class="content">
+                                        <div class="header">Function of the Equipment</div>
+                                        {{ item.details.functionOfTheEquipment }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ui stackable grid item container">
+                                <div class="row" style='justify-content: space-between;'>
+                                    <div class="content">
+                                        <div class="header">Name Of The Manufacturer</div>
+                                        {{ item.details.nameOfTheManufacturer }}
+                                    </div>
+                                    <div class="content">
+                                        <div class="header">Address Of Manufacturer</div>
+                                        {{ item.details.addressOfTheManufacturer }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ui stackable grid item">
+                                <div class="content eight column wide">
+                                    <div class="header">Year Of Manufacture</div>
+                                    {{ item.details.yearOfManufacture }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui divider"></div>
+                    <div>
+                        <div class="section-title">Equipment Documents</div>
+                        <div class="ui relaxed divided list">
+                            <div class="item" *ngFor="let document of item.listOfDocuments">
+                                <div class="ui grid">
+                                    <div class="column twelve wide">{{ document.file.name }}</div>
+                                    <div class="column four wide">
+                                        <app-blue-button [btnType]="['basic', 'primary', 'ui', 'button', 'small']" (click)='readFile(document)'>View</app-blue-button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui divider"></div>
+                    <div>
+                        <div class="section-title">Equipment Specification Standards</div>
+                        <div class="ui relaxed divided list">
+                            <div class="item" *ngFor="
+                  let specificationStandard of item.listOfSpecificationStandards
+                ">
+                                <div class="ui grid">
+                                    <div class="column twelve wide">
+                                        {{ specificationStandard.specificationTitle }}
+                                    </div>
+                                    <div class="column four wide">
+                                        <app-blue-button [btnType]="['basic', 'primary', 'ui', 'button', 'small']">View</app-blue-button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="ui grid stackable container" style="margin-top: 96px;">
+            <div class="row" style="justify-content: flex-end;">
+                <app-blue-button [btnType]="['ui', 'primary', 'massive', 'button', 'basic']">Save &amp; Continue Later</app-blue-button>
+                <app-blue-button [btnType]="['ui', 'primary', 'massive', 'button']" (click)='showSubmissionModal = true'>Next</app-blue-button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<sui-modal [isClosable]="true" [size]="'small'" (dismissed)="hideSubmissionModal()" *ngIf="showSubmissionModal" #modal>
+    <div class="content">
+        <div>
+            <h2>Are you sure you want to submit your Type Approval Application?</h2>
+        </div>
+    </div>
+    <div class="node-option ui grid stackable container actions" style='justify-content: space-around; margin-top: 30px;'>
+        <app-blue-button [btnType]='["ui", "primary", "huge", "button", "basic"]' (click)='showSubmissionModal = false;'>No</app-blue-button>
+        <app-blue-button [btnType]='["ui", "primary", "huge", "button"]' (click)='showSubmissionModal = false; submit()'>Yes</app-blue-button>
+    </div>
+</sui-modal>
+
+
+<sui-modal [isClosable]="true" [size]="'small'" (dismissed)="hidePreviewModal()" *ngIf="previewModal" #modal>
+    <div class="header">Document Preview</div>
+    <div class="content">
+        <div #page>
+
+        </div>
+    </div>
+</sui-modal>

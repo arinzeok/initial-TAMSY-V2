@@ -1,0 +1,75 @@
+@font-face {
+    font-family: RobotoLight;
+    src: url('../../../../..//assets/fonts/Roboto/Roboto-Light.ttf');
+}
+
+@font-face {
+    font-family: RobotoBold;
+    src: url('../../../../../assets/fonts/Roboto/Roboto-Bold.ttf');
+}
+
+@font-face {
+    font-family: RobotoMedium;
+    src: url('../../../../..//assets/fonts/Roboto/Roboto-Medium.ttf');
+}
+
+.container {
+    padding-bottom: 40px;
+}
+
+.main {
+    margin-top: 30px;
+    .info-header-container {
+        margin-top: 50px;
+        .header {
+            font-size: 24px;
+            font-family: RobotoMedium, sans-serif;
+            line-height: 28px;
+        }
+        .sub-header {
+            color: #9C9C9C;
+            font-size: 20px;
+            font-family: RobotoLight, sans-serif;
+            line-height: 1.5em;
+        }
+    }
+    .info {
+        .info-body {
+            ul {
+                margin: 0;
+                padding: 0;
+                display: grid;
+                grid-row-gap: 36px;
+                margin-right: 50px;
+                margin-left: 35px;
+                li {
+                    font-size: 18px;
+                    // font-family: RobotoLight, sans-serif;
+                    span {
+                        background-color: rgba(24, 160, 251, 0.19);
+                        border-radius: 50%;
+                        color: #666060;
+                        font-size: 36px;
+                        padding: 20px;
+                        font-weight: 500;
+                        font-family: RobotoMedium, sans-serif;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.button-container {
+    display: inline-flex;
+    flex-direction: column;
+    text-align: center;
+    margin-left: auto;
+    .not-right-now {
+        padding: 6px 0;
+        cursor: pointer;
+        font-size: 20px;
+        color: #9C9C9C;
+        margin-top: 10px;
+    }
+}

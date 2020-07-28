@@ -1,0 +1,72 @@
+$active-link: #1F5FBE;
+.main {
+    margin-top: 30px;
+}
+
+app-navigation ul {
+    display: flex;
+    list-style: none;
+    width: 100%;
+    border-bottom: 2px solid rgba(196, 196, 196, 0.92);
+    margin: 0;
+    padding: 0;
+    li {
+        padding: 10px 30px;
+        border-bottom: 3px solid transparent;
+        cursor: pointer;
+        color: #666060;
+        font-size: 14px;
+        white-space: nowrap;
+        position: relative;
+        top: 2px;
+        pointer-events: none;
+    }
+}
+
+.ui.secondary.pointing.menu .active.item {
+    border-bottom-color: $active-link;
+    color: $active-link;
+    font-weight: bold;
+}
+
+.steps {
+    a {
+        background-color: #EAEFFB;
+        color: #3F4395;
+        transition: .2s, ease;
+        font-size: 14px;
+        span {
+            color: #fff;
+            background-color: #3F4395;
+            margin-right: 15px;
+            transition: .2s, ease;
+        }
+    }
+    a::after {
+        background: #EAEFFB;
+        border-bottom-color: #fff !important;
+        border-right-color: #fff !important;
+        border-right-width: 2px;
+        border-bottom-width: 2px;
+    }
+    a:not(:last-child) {
+        border-right: 1px solid #fff;
+    }
+    a:not(:first-child) {
+        border-left: 1px solid #fff;
+    }
+    a.theme-bg {
+        color: #fff !important;
+        transition: .2s, ease;
+        span {
+            color: #3F4395;
+            transition: .2s, ease;
+            background-color: #fff;
+        }
+    }
+    a.theme-bg::after {
+        background-color: #3F4395;
+        border-right-width: 3px;
+        border-bottom-width: 3px;
+    }
+}

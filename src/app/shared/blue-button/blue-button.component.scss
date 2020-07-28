@@ -3,8 +3,9 @@ button {
     background: none;
     border-radius: 6px;
     padding: 5.5px 15px;
-    font-size: 15px;
+    font-size: 12px;
     cursor: pointer;
+    font-weight: 100 !important;
 }
 
 button.ghostBtn {
@@ -17,6 +18,10 @@ button.normalBtn {
     background-color: #1F5FBE;
     color: #fff;
     border: 1px solid transparent;
+}
+
+button.btn-md {
+    padding: 8px 35.578px;
 }
 
 button.btn-lg {

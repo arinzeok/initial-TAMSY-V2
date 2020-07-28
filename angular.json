@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "TAMSY-V2": {
+    "ncc-upgrade": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/TAMSY-V2",
+            "outputPath": "dist/ncc-upgrade",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -34,12 +34,10 @@
           },
           "configurations": {
             "production": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ],
+              "fileReplacements": [{
+                "replace": "src/environments/environment.ts",
+                "with": "src/environments/environment.prod.ts"
+              }],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -48,8 +46,7 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "budgets": [
-                {
+              "budgets": [{
                   "type": "initial",
                   "maximumWarning": "2mb",
                   "maximumError": "5mb"
@@ -60,24 +57,39 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "live": {
+              "fileReplacements": [{
+                "replace": "src/environments/environment.ts",
+                "with": "src/environments/environment.live.ts"
+              }],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": true,
+              "buildOptimizer": true
             }
           }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "TAMSY-V2:build"
+            "browserTarget": "ncc-upgrade:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "TAMSY-V2:build:production"
+              "browserTarget": "ncc-upgrade:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "TAMSY-V2:build"
+            "browserTarget": "ncc-upgrade:build"
           }
         },
         "test": {
@@ -114,15 +126,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "TAMSY-V2:serve"
+            "devServerTarget": "ncc-upgrade:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "TAMSY-V2:serve:production"
+              "devServerTarget": "ncc-upgrade:serve:production"
             }
           }
         }
       }
-    }},
-  "defaultProject": "TAMSY-V2"
+    }
+  },
+  "defaultProject": "ncc-upgrade"
 }

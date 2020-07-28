@@ -1,0 +1,51 @@
+<!-- Navbar -->
+<nav>
+    <div class="top theme-bg">
+        <div class="container ui grid stackable">
+            <!-- Logo -->
+            <div class="logo-container">
+                <img class="logo" routerLink="/contractor/home/applications" src="assets/icons/ncc-logo.svg" alt="" />
+                <span class='logo-label'>Type Approval <br> Management System</span>
+            </div>
+
+            <!-- Links -->
+            <div class="nav">
+                <div class="e-services right floated right aligned six wide">
+                    <img src="assets/icons/th-icon.svg" alt=""> E-Services
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="bottom">
+        <div class="container ui grid stackable">
+            <sui-tabset class='left floated ten wide' style="padding-bottom: 0;">
+                <div class="ui pointing secondary menu stackable grid">
+                    <a class="item" style='padding-left: 0;'>Home</a>
+                    <a class="item" routerLink='/contractor/home/applications' routerLinkActive='active'>Applications</a>
+                    <a class="item">Permits</a>
+                    <a class="item">Certificate Holder's Profile</a>
+                    <a class="item">Messages <span class="notification"></span></a>
+                </div>
+            </sui-tabset>
+
+            <div class="ui dropdown" suiDropdown>
+                <div class="text" style='font-size: 12px;'>Alimi Brothers & Sons</div>
+                <i class="dropdown icon"></i>
+                <div class="menu left transition hidden" suiDropdownMenu>
+                    <div class="item">Applications</div>
+                    <div class="item">International Students</div>
+                    <div class="item">Scholarships</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</nav>
+<div>
+    <router-outlet></router-outlet>
+</div>
+
+<app-footer></app-footer>

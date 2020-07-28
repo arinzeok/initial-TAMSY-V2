@@ -1,0 +1,98 @@
+$border: 1px solid rgba(196, 196, 196, 0.92);
+$labelColor: #666060;
+@mixin small-screen {
+    @media screen and (max-width: 768px) {
+        @content;
+    }
+}
+
+.top {
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-top: -10px;
+}
+
+.header {
+    font-size: 24px;
+    font-weight: 900;
+}
+
+.action-icons {
+    i {
+        font-size: 22px;
+        color: #86879D;
+    }
+    img {
+        height: 18px;
+        margin-right: 20px;
+    }
+}
+
+.bread-crumb {
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.4);
+}
+
+.panel {
+    background: #F0F1F8;
+    .forms-container {
+        display: flex;
+        @include small-screen {
+            display: flow-root;
+        }
+        >div:not(:first-child) {
+            display: flex;
+            margin-left: 20px;
+            @include small-screen {
+                margin-left: 0;
+                margin-top: 15px;
+            }
+        }
+        .display {
+            align-self: center;
+            label {
+                color: $labelColor;
+                font-size: 14px;
+            }
+            select {
+                border: $border;
+                border-radius: 4px;
+                height: 30px;
+                background: none;
+                margin-left: 10px;
+                width: 90px;
+                padding: 0 10px;
+                color: $labelColor;
+            }
+        }
+        .row {
+            display: flex;
+            align-self: center;
+            label {
+                color: $labelColor;
+                font-size: 14px;
+            }
+            div {
+                margin-left: 10px;
+                font-size: 14px;
+            }
+        }
+    }
+    .button-container {
+        display: flex;
+        align-content: flex-end;
+        >:first-child {
+            margin-right: 15px;
+        }
+    }
+}
+
+.application-list-container {
+    border: 1px solid #9c9c9c;
+    border-radius: 4px;
+    padding: 5px 15px;
+    margin-top: 20px;
+    height: 80vh;
+    overflow-y: scroll;
+}

@@ -1,0 +1,170 @@
+<div class="main">
+    <div class="container grid stackable top ui">
+        <div class="certificate-holder-details column container row segment stackable wide">
+            <div class="certificate-holder-name column six wide">
+                <label>Certificate Holder</label>
+                <div>Huawei Technologies Co., Ltd.</div>
+            </div>
+            <div class="certificate-holder-address column six wide">
+                <label>Address</label>
+                <div>One Apple Park Way Cupertino, CA 95014, USA</div>
+            </div>
+            <div class="ui vertical divider"></div>
+            <app-blue-button (click)="showAddEquipmentModal(true)" [btnType]="['primary', 'button', 'theme-bg', 'ui']" class="column four wide">Add Equipment</app-blue-button>
+        </div>
+    </div>
+    <div class="bottom">
+        <h3 class="theme-color">Equipment</h3>
+        <div class="ui divider theme-bg"></div>
+
+        <div *ngIf="!this.equipmentListService.nodes.length" class="ui grid" style="justify-content: center;">
+            <img class="row" src="assets/icons/no-item-added.svg" alt="" height="200px" />
+            <h3 class="theme-color row" style="margin-bottom: 5px; padding: 0;">
+                There are no items here
+            </h3>
+            <span class="row" style="padding: 0;">Click here to add new items</span>
+        </div>
+
+        <div *ngIf="this.equipmentListService.nodes.length" class="form grid ui container stackable" style="justify-content: space-between; margin-top: 7px;">
+            <div class="node-container column six wide">
+                <ng-template #tmplNode let-node="node">
+                    <div class="node-item" [attr.data-id]="node.id" [attr.id]="'node-' + node.id">
+                        <div class="node-title single-equipment-box" [ngClass]="{ active: selectedNode?.key === node.key }" (click)="node.isExpanded = !node.isExpanded">
+                            <img src="assets/icons/node-handle.svg" class="node-handle-icon" alt="" cdkDragHandle />
+                            <div>
+                                {{ node.children.length ? node.isExpanded ? "" : "" : "&nbsp;&nbsp;&nbsp;" }}
+                                <i *ngIf="node.children.length && node.isExpanded" class="chevron down icon"></i>
+                                <i *ngIf="node.children.length && !node.isExpanded" class="chevron right icon"></i> &nbsp;&nbsp;&nbsp; {{ node.details.equipmentRegulatoryName }}
+                            </div>
+                            <img src="assets/icons/kebab-menu.svg" class="node-menu-icon" alt="" (click)="showNodeOptionsModal(node.key, $event)" />
+                        </div>
+
+                        <div *ngIf="node.isExpanded && node.children.length" class="node-children" cdkDropList [cdkDropListData]="node.children" [id]="node.id" [cdkDropListConnectedTo]="dropTargetIds" (cdkDropListDropped)="drop($event)" [cdkDropListSortingDisabled]="true">
+                            <div *ngFor="let child of node.children" cdkDrag [cdkDragData]="child.id" (click)="
+                  selectSingleEquipment(child.key); $event.stopPropagation()
+                " (cdkDragMoved)="dragMoved($event)">
+                                <ng-container *ngTemplateOutlet="tmplNode; context: { node: child }"></ng-container>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+
+                <div cdkDropList [cdkDropListData]="this.equipmentListService.nodes" [id]="'main'" [cdkDropListConnectedTo]="dropTargetIds" (cdkDropListDropped)="drop($event)" [cdkDropListSortingDisabled]="true">
+                    <div *ngFor="let node of this.equipmentListService.nodes" cdkDrag [cdkDragData]="node.id" (click)="selectSingleEquipment(node.key); $event.stopPropagation()" (cdkDragMoved)="dragMoved($event)">
+                        <ng-container *ngTemplateOutlet="tmplNode; context: { node: node }"></ng-container>
+                    </div>
+                </div>
+            </div>
+            <div class="form-container column nine wide">
+                <div class="ui middle aligned divided list">
+                    <div class="item">
+                        <div class="content">
+                            <label for="" class="ui label">
+                      Equipment Type
+                    </label>
+                            <a class="header">{{this.selectedNode?.details.equipmentType}}</a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="content">
+                            <label for="" class="ui label">
+                      Regulatory Name
+                    </label>
+                            <a class="header">{{this.selectedNode?.details.equipmentRegulatoryName}}</a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="content">
+                            <label for="" class="ui label">
+                      Commercial Name
+                    </label>
+                            <a class="header">{{this.selectedNode?.details.commercialName}}</a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="content">
+                            <label for="" class="ui label">
+                      Function Of The Equipment
+                    </label>
+                            <a class="header">{{this.selectedNode?.details.functionOfTheEquipment}}</a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="content">
+                            <label for="" class="ui label">
+                      Name Of The Manufacturer
+                    </label>
+                            <a class="header">{{this.selectedNode?.details.nameOfTheManufacturer}}</a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="content">
+                            <label for="" class="ui label">
+                      Address Of Manufacturer
+                    </label>
+                            <a class="header">{{this.selectedNode?.details.addressOfManufacturer}}</a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="content">
+                            <label for="" class="ui label">
+                      Year Of Manufacture
+                    </label>
+                            <a class="header">{{this.selectedNode?.details.yearOfManufacture}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<sui-modal [isClosable]="true" [size]="'small'" (dismissed)="show = false" *ngIf="show" #modal>
+    <div class="header theme-color">Add New Equipment</div>
+    <div class="content">
+        <form (ngSubmit)="createNewEquipment(form); show = false" #form="ngForm">
+            <div>
+                <input type="text" name="equipmentRegulatoryName" placeholder="Equipment Regulatory Name" ngModel />
+            </div>
+            <div>
+                <select class="selection" name="equipmentType" #select>
+                          <option value="">Equipment Type</option>
+          <option *ngFor="let option of options" [value]="option">
+            {{ option }}
+          </option>
+        </select>
+            </div>
+            <div>
+                <input type="text" id="regulatory-name" name="regulatoryName" ngModel placeholder="Regulatory Name" />
+            </div>
+            <div>
+                <input type="text" id="commercial-name" name="commercialName" ngModel placeholder="Commercial Name" />
+            </div>
+            <div>
+                <textarea type="text" id="function-of-the-equipment" name="functionOfTtheEquipment" ngModel placeholder="Function Of The Equipment"></textarea>
+            </div>
+            <div>
+                <input type="text" id="name-of-the-manufacturer" name="nameOfTheManufacturer" ngModel placeholder="Name Of The Manufacturer" />
+            </div>
+            <div>
+                <input type="text" id="addressOfTheManufacturer" name="address-of-the-manufacturer" ngModel placeholder="Address Of The Manufacturer" />
+            </div>
+            <div>
+                <input type="number" id="yearOfManufacture" name="year-of-manufacture" ngModel placeholder="Year Of Manufacture" />
+            </div>
+            <div class="ui divider"></div>
+            <div class="button-container">
+                <app-blue-button [btnType]="['basic', 'primary', 'ui', 'button']">Done</app-blue-button>
+            </div>
+        </form>
+    </div>
+</sui-modal>
+<sui-modal [isClosable]="true" [size]="'mini'" (dismissed)="hideNodeOptionsModal()" *ngIf="showNodeOptions" #modal>
+    <div class="content">
+        <div (click)="showAddEquipmentModal()" class="node-option">
+            ADD EQUIPMENT HERE
+        </div>
+        <div (click)="duplicateEquipment()" class="node-option">DUPLICATE</div>
+        <div (click)="deleteEquipment()" class="node-option">DELETE</div>
+    </div>
+</sui-modal>
